@@ -1,13 +1,6 @@
-# DI
-<em>Hola<em>
-/*Título e imagen de portada;
-Insignias;
-Índice;
-Descripción del Proyecto;
-Estado del proyecto;
-Demostración de funciones y aplicaciones;
-Acceso al Proyecto;
-Tecnologías utilizadas;
-Personas Contribuyentes;
-Personas Desarrolladoras del Proyecto;
-Licencia.*/
+#DI
+<h1 align="center">GoodReads</h1>
+<h1 align="center">
+  
+![goodreads](https://github.com/user-attachments/assets/6556d6e6-db9e-49d4-9ae2-c57a36bc19f8)
+</h1>
