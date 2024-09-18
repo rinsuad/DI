@@ -1,41 +1,84 @@
-#DI
-#Título e imagen de portada
-<h1 align="center">📚GoodReads📚</h1>
-<h1 align="center">
-  
-![goodreads](https://github.com/user-attachments/assets/6556d6e6-db9e-49d4-9ae2-c57a36bc19f8)
-</h1>
+## Título e imagen de portada
 
-<p align="left">
-   <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-blue">
-   </p>
+# <center>📚GoodReads📚</center>
 
-![GitHub Org's stars](https://img.shields.io/github/stars/rinsuad?style=social) <img src="https://img.shields.io/badge/reading-project-red">
+![Imagen de GoodReads](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKT5r8xDIFUkKZKemJpx-fm9hZF3eAmyKNwA&s)
 
-#descripción-del-proyecto
+## Índice
+
+- [Título e imagen de portada](#título-e-imagen-de-portada)
+
+- [Insignias](#insignias)
+
+- [Índice](#índice)
+
+- [Descripción del proyecto](#descripción-del-proyecto)
+
+- [Estado del proyecto](#estado-del-proyecto)
+
+- [Demostración de funciones y aplicaciones](#demostración-de-funciones-y-aplicaciones)
+
+- [Acceso al proyecto](#acceso-al-proyecto)
+
+- [Tecnologías utilizadas](#tecnologías-utilizadas)
+
+- [Personas Contribuyentes](#personas-contribuyentes)
+
+- [Personas Desarrolladoras del Proyecto](#personas-desarrolladoras-del-proyecto)
+
+- [Licencia](#licencia)
+
+## Insignias
+
+![GitHub Org's stars](https://img.shields.io/github/stars/rinsuad?style=social)
+<img src="https://img.shields.io/badge/reading-project-red">
+<img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-blue">
+
+## Descripción del proyecto
 
 Bienvenido a [GoodReads](https://www.goodreads.com/)📖- Disfruta de los libros y comparte tu experiencia. Es una aplicación que da las herramientas al lector para registrar los libros que lee, sus opiniones sobre ellos y aquellos libros que quiere leer, además de compartir su opinión con los demás usuarios, creando de esta forma un ranking sobre libros y haciendo recomendaciones al usuario basándonos en sus lecturas favoritas.
 
-##Índice
+## Estado del proyecto
 
-*[Título e imagen de portada](#Título-e-imagen-de-portada)
+La aplicación se encuentra en el mercado y recibe actualizaciones periódicas en las que se añaden o modifican features.
 
-*[Insignias](#insignias)
+## Demostración de funciones y aplicaciones
 
-*[Índice](#índice)
+Funcionalidades de la aplicación
 
-*[Descripción del proyecto](#descripción-del-proyecto)
+- Funcionalidad 1: Almacén de datos de libros y autores.
+- Funcionalidad 2: Almacén de datos para cada usuario de listas de lectura, libros leídos, opiniones y ratings.
+- Funcionalidad 3: Recomendación de libros en funcion de libros leídos por el usuario, ratings de los libros y autores seguidos.
+- Funcionalidad 4: Estructura de red social entre usuarios, autores y comunidades de lectura.
 
-*[Estado del proyecto](#Estado-del-proyecto)
+## Acceso al proyecto
 
-*[Demostración de funciones y aplicaciones](#Demostración-de-funciones-y-aplicaciones)
+Dispone de versión web y versión para android/IOS
 
-*[Acceso al proyecto](#acceso-proyecto)
+[GoodReads para web](https://www.goodreads.com/)
 
-*[Tecnologías utilizadas](#tecnologías-utilizadas)
+[GoodReads para Android](https://play.google.com/store/apps/details?id=com.goodreads&hl=en&pli=1)
 
-*[Personas Contribuyentes](#personas-contribuyentes)
+## Tecnologías utilizadas
 
-*[Personas Desarrolladoras del Proyecto](#personas-desarrolladoras)
+Goodreads utiliza 34 productos y servicios tecnológicos que incluyen HTML5, jQuery, and Google Analytics, according to G2 Stack.
 
-*[Licencia](#licencia)
+Además Goodreads está utilizando activamente 41 tecnologías para la web, entre ellas encontramos Viewport Meta, IPhone / Mobile Compatible, y SSL by Default.
+
+## Personas contribuyentes
+
+Rebeca Insua Docampo
+
+Equipo de GoodReads
+
+## Personas desarrolladoras del proyecto
+
+Rebeca Insua Docampo
+
+Equipo de GoodReads
+
+## Licencia
+
+Para revisar los términos de uso de la aplicación puedes visitar [este enlace](https://www.goodreads.com/about/terms).
+
+© 2024 Goodreads, Inc.
