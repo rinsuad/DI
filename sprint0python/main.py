@@ -9,5 +9,6 @@ def main():
     mazmorra = Mazmorra(heroe)
     mazmorra.jugar()
 
+
 if __name__ == "__main__":
     main()

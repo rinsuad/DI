@@ -6,10 +6,10 @@ while True:
     except ValueError:
         print("Por favor, introduce un número válido.")
 
-# Importamos las operaciones del otro archivo y operamos con ellas en este para no volver a escribirlas.
 import operaciones
 
 while True:
+
     while True:
         try:
             opcion = int(input("Qué quieres hacer con los números?\n 1.Sumar\n 2.Restar\n 3.Multiplicar\n 4.Dividir\n"))
