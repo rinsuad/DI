@@ -17,7 +17,7 @@ hobbies_names = ["Leer", "Deporte", "Música"]
 
 # Define the function that will show the hobbies
 def show_hobbies():
-    # We get the selected hobbies
+    # We get the selected hobbies using a list comprehension
     selected_hobbies = [hobbies_names[i] for i, var in enumerate(hobbies_var) if var.get()]
     # We update the label
     label2.config(text=f"Estos son tus hobbies: {', '.join(selected_hobbies)}")
