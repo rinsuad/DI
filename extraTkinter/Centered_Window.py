@@ -11,7 +11,7 @@ root.resizable(True, True)
 label_resizable = tk.Label(root, text="Prueba a redimensionar la pantalla", font=("Arial", 15))
 label_resizable.pack()
 
-
+# This function will show the dimensions of the screen
 def show_dimensions():
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -22,6 +22,7 @@ button_dimensions.pack()
 label_dimensions = tk.Label(root, text="", font=("Arial", 15))
 label_dimensions.pack()
 
+# This function will change the text of the button to show that the screen can be resized
 def more_text():
     return label_button_text.config(text="Este botón tiene un texto muy largo, para demostrar que la pantalla aumenta de tamaño \n todo lo que le haga falta a la app", font=("Arial", 15))
 
@@ -30,6 +31,7 @@ button_size.pack()
 label_button_text = tk.Label(root, text="", font=("Arial", 15))
 label_button_text.pack()
 
+# This function will show the dimensions of the button needed to display its text
 def show_button_size():
     req_width = button_size.winfo_reqwidth()
     req_height = button_size.winfo_reqheight()
