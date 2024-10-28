@@ -25,10 +25,12 @@ class NotasModel:
         return self.notas
 
     def guardar_notas(self):
+        # We write the notes to the file line by line
         with open("notas.txt", "w") as archivo:
             for nota in self.notas:
                 archivo.write(nota + "\n")
 
     def cargar_notas(self):
+        # We read the notes from the file line by line
         with open("notas.txt", "r") as archivo:
             self.notas = [linea.strip() for linea in archivo]

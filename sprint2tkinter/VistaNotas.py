@@ -21,8 +21,11 @@
 
 import tkinter as tk
 
+
 class Vista:
     def __init__(self, root):
+        # We create the root window, the labels, entry, listbox and buttons of the application
+
         self.root = root
         self.root.title("Aplicación de Notas")
 
