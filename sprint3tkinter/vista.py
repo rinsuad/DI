@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog
+from PIL import Image, ImageTk
 
 class MainMenu:
     def __init__(self, root, controller):
@@ -37,16 +38,20 @@ class MainMenu:
         return simpledialog.askstring("Nombre del Jugador", "Introduce tu nombre:")
 
 
+
 class GameView:
     def __init__(self, root, model):
         self.root = root
         self.model = model
         self.board_frame = tk.Frame(root)
+        self.board_frame.pack()
 
     def create_board(self):
-        self.board_frame.pack()
-        for row in self.model.board:
-            for card in row:
-                # Creates a button for each card, hidden at first
-                card_button = tk.Button(self.board_frame, image=self.model.hidden_image)
-                card_button.pack(side="left")
+        for i, row in enumerate(self.model.board):
+            for j, card in enumerate(row):
+                # Resize the PIL image
+                resized_image = self.model.hidden_image.resize((100, 100), Image.LANCZOS)
+                photo_image = ImageTk.PhotoImage(resized_image)
+                card_button = tk.Button(self.board_frame, image=photo_image)
+                card_button.image = photo_image  # Keep a reference to avoid garbage collection
+                card_button.grid(row=i, column=j)  # Place the button in the grid

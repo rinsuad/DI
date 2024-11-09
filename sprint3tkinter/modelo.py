@@ -27,18 +27,18 @@ class GameModel:
     def _load_images(self):
         # Donwload the hidden card image
         self.hidden_image = descargar_imagen(
-            "https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/hidden_card.png")
+            "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/hidden_card.JPG")
 
         # Download the images for the cards
         self.card_images = [
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card1.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card2.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card3.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card4.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card5.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card6.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card7.JPG"),
-            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card8.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
         ]
 
         # Indicar que las imágenes se han descargado
