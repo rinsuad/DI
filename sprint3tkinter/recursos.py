@@ -1,11 +1,16 @@
 import requests
-from PIL import Image, ImageTk
+from PIL import Image
 from io import BytesIO
 
-# Download an image from a URL and return it as a PhotoImage object
-# TODO: Cambiar la URL de las imagenes
 def descargar_imagen(url):
-    response = requests.get(url)
-    image_data = BytesIO(response.content)
-    image = Image.open(image_data)
-    return ImageTk.PhotoImage(image)
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad status codes
+        image_data = BytesIO(response.content)
+        image = Image.open(image_data)
+        return image
+    except requests.RequestException as e:
+        print(f"Error fetching image from {url}: {e}")
+    except Image.UnidentifiedImageError as e:
+        print(f"Error identifying image from {url}: {e}")
+    return None
