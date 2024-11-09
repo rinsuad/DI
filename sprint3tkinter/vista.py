@@ -35,3 +35,18 @@ class MainMenu:
     def ask_player_name(self):
         # Ask the user to enter their name
         return simpledialog.askstring("Nombre del Jugador", "Introduce tu nombre:")
+
+
+class GameView:
+    def __init__(self, root, model):
+        self.root = root
+        self.model = model
+        self.board_frame = tk.Frame(root)
+
+    def create_board(self):
+        self.board_frame.pack()
+        for row in self.model.board:
+            for card in row:
+                # Creates a button for each card, hidden at first
+                card_button = tk.Button(self.board_frame, image=self.model.hidden_image)
+                card_button.pack(side="left")

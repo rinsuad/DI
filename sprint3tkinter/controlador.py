@@ -1,6 +1,5 @@
-import tkinter as tk
-from tkinter import simpledialog, messagebox
-
+from tkinter import Toplevel, Label, messagebox, simpledialog
+from vista import GameView
 from modelo import GameModel
 
 class GameController:
@@ -8,31 +7,40 @@ class GameController:
         self.root = root
         self.main_menu = main_menu
         self.model = None
+        self.loading_window = None
+        self.player_name = None
 
     def start_game_callback(self):
-        # Show dialog to select difficulty
         difficulty = simpledialog.askstring("Seleccionar Dificultad", "Elige la dificultad: facil, medio, dificil")
 
         if difficulty in ["facil", "medio", "dificil"]:
-            # Ask for the player's name
             self.player_name = self.main_menu.ask_player_name()
 
             if self.player_name:
-                # Create the game model with the selected difficulty
                 self.model = GameModel(difficulty)
-                print(f"Dificultad seleccionada: {difficulty}")
-                print(f"Nombre del jugador: {self.player_name}")
-                print(f"Tablero generado: {self.model.board}")
+                self.show_loading_window()
+                self.model.load_images_thread()
+                self.check_images_loaded()
             else:
                 messagebox.showerror("Error", "Debes ingresar un nombre para jugar.")
         else:
-            # Show error message if the difficulty is not valid
             messagebox.showerror("Error", "Dificultad no válida. Inténtalo de nuevo.")
 
-    # Callback to show statistics
+    def show_loading_window(self):
+        self.loading_window = Toplevel(self.root)
+        Label(self.loading_window, text="Cargando imágenes...").pack()
+
+    def check_images_loaded(self):
+        # Verificar si las imágenes han sido cargadas
+        if self.model.images_loaded.is_set():
+            self.loading_window.destroy()
+            GameView(self.root, self.model).create_board()
+        else:
+            # Volver a comprobar después de 100 ms
+            self.root.after(100, self.check_images_loaded)
+
     def show_stats_callback(self):
         print("Mostrar estadísticas")
 
-    # Callback to quit the application
     def quit_callback(self):
-        self.root.quit()  # Quit the application
+        self.root.quit()
