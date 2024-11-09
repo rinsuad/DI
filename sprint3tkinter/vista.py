@@ -1,17 +1,37 @@
 import tkinter as tk
+from tkinter import simpledialog
 
 class MainMenu:
     def __init__(self, root, controller):
         self.root = root
         self.controller = controller
-        self.frame = tk.Frame(root)
-        self.frame.pack()
+        self.frame = tk.Frame(root)  # Create a frame for the main menu
+        self.frame.pack()  # Pack the frame
 
-        self.play_button = tk.Button(self.frame, text="Jugar", command=self.controller.start_game_callback)
-        self.play_button.pack(pady=10)
+        # Button to start the game
+        self.play_button = tk.Button(self.frame, text="Jugar", command=self.start_game)
+        self.play_button.pack()
 
-        self.stats_button = tk.Button(self.frame, text="Estadísticas", command=self.controller.show_stats_callback)
-        self.stats_button.pack(pady=10)
+        # Button to show statistics
+        self.stats_button = tk.Button(self.frame, text="Estadísticas", command=self.show_stats)
+        self.stats_button.pack()
 
-        self.quit_button = tk.Button(self.frame, text="Salir", command=self.controller.quit_callback)
-        self.quit_button.pack(pady=10)
+        # Button to quit the application
+        self.quit_button = tk.Button(self.frame, text="Salir", command=self.quit_game)
+        self.quit_button.pack()
+
+    def start_game(self):
+        if self.controller:
+            self.controller.start_game_callback()  # Call the start game callback
+
+    def show_stats(self):
+        if self.controller:
+            self.controller.show_stats_callback()  # Call the show stats callback
+
+    def quit_game(self):
+        if self.controller:
+            self.controller.quit_callback()  # Call the quit callback
+
+    def ask_player_name(self):
+        # Ask the user to enter their name
+        return simpledialog.askstring("Nombre del Jugador", "Introduce tu nombre:")

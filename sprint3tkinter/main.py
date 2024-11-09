@@ -3,11 +3,12 @@ from vista import MainMenu
 from controlador import GameController
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    root.withdraw()  # Oculta la ventana principal
+    root = tk.Tk()  # Create the main window
+    root.withdraw()  # Hide the main window
 
-    controller = GameController(root)
-    main_menu = MainMenu(root, controller)
+    main_menu = MainMenu(root, None)  # Initialize the main menu
+    controller = GameController(root, main_menu)  # Initialize the game controller
+    main_menu.controller = controller  # Set the controller in the main menu
 
-    root.deiconify()  # Muestra la ventana principal con el menú
-    root.mainloop()
+    root.deiconify()  # Show the main window
+    root.mainloop()  # Start the Tkinter event loop
