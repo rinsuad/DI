@@ -9,6 +9,7 @@ class GameController:
         self.model = None
         self.loading_window = None
         self.player_name = None
+        self.game_window = None
 
     def start_game_callback(self):
         difficulty = simpledialog.askstring("Seleccionar Dificultad", "Elige la dificultad: facil, medio, dificil")
@@ -31,12 +32,21 @@ class GameController:
         Label(self.loading_window, text="Cargando imágenes...").pack()
 
     def check_images_loaded(self):
-        # Verificar si las imágenes han sido cargadas
+        # Verify images were downloaded
         if self.model.images_loaded.is_set():
-            self.loading_window.destroy()
-            GameView(self.root, self.model).create_board()
+            if self.loading_window:
+                self.loading_window.destroy()
+                self.loading_window = None  # Ensure the loading window is properly destroyed
+
+            # Destroy the previous game window if it exists
+            if self.game_window and self.game_window.winfo_exists():
+                self.game_window.destroy()
+
+            # Create a new game window
+            self.game_window = Toplevel(self.root)
+            GameView(self.game_window, self.model).create_board()
         else:
-            # Volver a comprobar después de 100 ms
+            # Check again after 100 ms if the images are loaded
             self.root.after(100, self.check_images_loaded)
 
     def show_stats_callback(self):

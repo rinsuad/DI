@@ -43,10 +43,14 @@ class GameView:
     def __init__(self, root, model):
         self.root = root
         self.model = model
-        self.board_frame = tk.Frame(root)
+        self.board_frame = tk.Frame(self.root)  # Use the root window instead of creating a new Toplevel
         self.board_frame.pack()
 
     def create_board(self):
+        if not self.model.board:
+            print("Error: The board is not populated.")
+            return
+
         for i, row in enumerate(self.model.board):
             for j, card in enumerate(row):
                 # Resize the PIL image
