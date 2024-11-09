@@ -2,6 +2,7 @@ import random
 import threading
 from recursos import descargar_imagen
 
+
 class GameModel:
     def __init__(self, difficulty):
         self.difficulty = difficulty
@@ -11,7 +12,7 @@ class GameModel:
         self.images_loaded = threading.Event()  # Event to indicate that the images have been downloaded
 
     def _generate_board(self):
-        pairs = { # Number of pairs for each difficulty, modify as needed
+        pairs = {  # Number of pairs for each difficulty, modify as needed
             "facil": 6,
             "medio": 12,
             "dificil": 16
@@ -24,17 +25,23 @@ class GameModel:
         return [cards[i * size[1]:(i + 1) * size[1]] for i in range(size[0])]
 
     def _load_images(self):
-        # Download hidden card image
-        #TODO: Cambiar la URL de la imagen de la carta oculta
-        self.hidden_image = descargar_imagen("https://github.com/user/images/hidden_card.png")
+        # Donwload the hidden card image
+        self.hidden_image = descargar_imagen(
+            "https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/hidden_card.png")
 
-        # Download card images
-        for i in range(1, 5):
-            #TODO: Cambiar la URL de las imágenes de las cartas
-            image = descargar_imagen(f"https://github.com/user/images/card{i}.png")
-            self.card_images.append(image)
+        # Download the images for the cards
+        self.card_images = [
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card1.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card2.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card3.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card4.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card5.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card6.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card7.JPG"),
+            descargar_imagen("https://raw.githubusercontent.com/rinsuad/DI/main/sprint3tkinter/assets/card8.JPG"),
+        ]
 
-        # Indicates that the images have been downloaded
+        # Indicar que las imágenes se han descargado
         self.images_loaded.set()
 
     def load_images_thread(self):
