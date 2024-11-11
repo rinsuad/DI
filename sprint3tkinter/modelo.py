@@ -4,12 +4,12 @@ import time
 
 from recursos import descargar_imagen
 
-
 class GameModel:
     def __init__(self, difficulty, controller):
+        # Initialize the game model
         self.difficulty = difficulty
         self.controller = controller
-        self.board = self._generate_board()
+        self.board = self._generate_board()  # Generate the game board
         self.hidden_image = None
         self.card_images = []
         self.images_loaded = threading.Event()  # Event to indicate that the images have been downloaded
@@ -17,6 +17,7 @@ class GameModel:
         self.timer_running = False
         self.move_count = 0
 
+    # Generate the board based on the difficulty
     def _generate_board(self):
         sizes = {  # Board sizes for each difficulty
             "facil": (2, 4),  # 2x4 board (8 cards)
@@ -38,8 +39,9 @@ class GameModel:
         print("Generated board:", board)  # Debug print
         return board
 
+    # Load the images for the cards
     def _load_images(self):
-        # Donwload the hidden card image
+        # Download the hidden card image
         self.hidden_image = descargar_imagen(
             "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/hidden_card.JPG")
 
@@ -63,13 +65,14 @@ class GameModel:
                 "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card8.JPG"),
         ]
 
-        # Indicar que las imágenes se han descargado
+        # Indicate that the images have been downloaded
         self.images_loaded.set()
 
+    # Load the images in a new thread to avoid blocking the main thread
     def load_images_thread(self):
-        # Execute the _load_images method in a new thread
         threading.Thread(target=self._load_images).start()
 
+    # Function to start the timer
     def start_timer(self):
         self.timer_running = True
         self.timer_thread = threading.Thread(target=self._run_timer)
@@ -80,5 +83,6 @@ class GameModel:
             time.sleep(1)
             self.time_elapsed += 1
 
+    # Function to update the time label with the elapsed time
     def update_time(self):
         self.controller.game_view.update_time_label(self.time_elapsed)

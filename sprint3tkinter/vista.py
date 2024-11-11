@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import simpledialog
 from PIL import Image, ImageTk
 
-
 class MainMenu:
     def __init__(self, root, controller):
         self.root = root
@@ -40,7 +39,6 @@ class MainMenu:
         # Ask the user to enter their name
         return simpledialog.askstring("Nombre del Jugador", "Introduce tu nombre:")
 
-
 class GameView:
     def __init__(self, root, model, controller):
         self.move_label = None
@@ -51,17 +49,18 @@ class GameView:
         self.board_frame = tk.Frame(self.root)  # Use the root window instead of creating a new Toplevel
         self.board_frame.pack()
 
-
+        # Create the labels for the move count and time elapsed
         self.move_label = tk.Label(self.root, text="Movimientos: 0")
         self.move_label.pack()
         self.time_label = tk.Label(self.root, text="Tiempo: 0")
         self.time_label.pack()
 
     def create_board(self):
+        # Check if the board is populated
         if not self.model.board:
             print("Error: The board is not populated.")
             return
-
+        # Create the buttons for the cards
         for i, row in enumerate(self.model.board):
             for j, card in enumerate(row):
                 # Resize the PIL image
@@ -69,18 +68,16 @@ class GameView:
                 photo_image = ImageTk.PhotoImage(resized_image)
 
                 # Create a button with the image for each card
-                card_button = tk.Button(
-                    self.board_frame,
-                    image=photo_image,
-                    command=lambda i=i, j=j: self.controller.on_card_click((i, j))
-                )
-                card_button.image = photo_image  # Keep a reference to avoid garbage collection
+                card_button = tk.Button(self.board_frame, image=photo_image,
+                                        command=lambda i=i, j=j: self.controller.on_card_click((i, j)))
+                card_button.image = photo_image  # Keep a reference to the image
                 card_button.grid(row=i, column=j)  # Place the button in the grid
 
                 # Ensure the button is enabled initially
                 card_button.config(state="normal")
 
     def update_board(self, card_position, show=False, permanent=False):
+        # Get the card number from the board
         i, j = card_position
         card = self.model.board[i][j]
 
@@ -101,7 +98,7 @@ class GameView:
         button.image = photo_image
 
         if permanent:
-            button.config(state="disabled")
+            button.config(state="disabled")  # Disable the button if the card is matched
 
     def reset_cards(self, card1, card2):
         for card in [card1, card2]:
@@ -110,10 +107,10 @@ class GameView:
             photo_image = ImageTk.PhotoImage(resized_image)
             button = self.board_frame.grid_slaves(row=i, column=j)[0]
             button.config(image=photo_image)
-            button.image = photo_image
+            button.image = photo_image  # Reset the card image to hidden
 
     def update_move_label(self, move_count):
-        self.move_label.config(text=f"Movimientos: {move_count}")
+        self.move_label.config(text=f"Movimientos: {move_count}")  # Update the move count label
 
     def update_time_label(self, time_elapsed):
-        self.time_label.config(text=f"Tiempo: {time_elapsed} segundos")
+        self.time_label.config(text=f"Tiempo: {time_elapsed} segundos")  # Update the time elapsed label
