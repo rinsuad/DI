@@ -36,19 +36,19 @@ class GameModel:
             descargar_imagen(
                 "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card2.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card3.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card4.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card5.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card6.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card7.JPG"),
             descargar_imagen(
-                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card1.JPG"),
+                "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card8.JPG"),
         ]
 
         # Indicar que las imágenes se han descargado

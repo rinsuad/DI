@@ -29,6 +29,7 @@ class GameController:
 
     def show_loading_window(self):
         self.loading_window = Toplevel(self.root)
+        self.loading_window.title("Cargando")
         Label(self.loading_window, text="Cargando imágenes...").pack()
 
     def check_images_loaded(self):
@@ -44,6 +45,7 @@ class GameController:
 
             # Create a new game window
             self.game_window = Toplevel(self.root)
+            self.game_window.title("Tablero de partida")
             GameView(self.game_window, self.model).create_board()
         else:
             # Check again after 100 ms if the images are loaded
