@@ -30,7 +30,7 @@ class MainMenu:
 
     def start_game(self):
         if self.controller:
-            self.controller.start_game_callback() # Call the start game callback
+            self.controller.start_game_callback()  # Call the start game callback
 
     def show_stats(self):
         if self.stats_window is not None and self.stats_window.winfo_exists():
@@ -94,25 +94,38 @@ class GameView:
     def create_board(self):
         # Check if the board is populated
         if not self.model.board:
-            print("Error: El tablero no está poblado.")
+            print("Error: The board is not populated.")
             return
         # Create the board buttons
         for i, row in enumerate(self.model.board):
             for j, card in enumerate(row):
-                # Resize the image to 100x100 pixels
-                resized_image = self.model.hidden_image.resize((100, 100), Image.LANCZOS)
-                photo_image = ImageTk.PhotoImage(resized_image)
-                # Create a button for the card
-                card_button = ttk.Button(self.board_frame, image=photo_image,
-                                         command=lambda i=i, j=j: self.controller.on_card_click((i, j)))
-                card_button.image = photo_image # Keep a reference to the image
-                card_button.grid(row=i, column=j, padx=5, pady=5) # Place the button in the grid
+                if self.model.hidden_image is None:
+                    print("Error: Couldn't find the hidden image.")
+                    return
+                else:
+                    # Resize the image to 100x100 pixels
+                    resized_image = self.model.hidden_image.resize((100, 100), Image.LANCZOS)
+
+                if resized_image:
+                    photo_image = ImageTk.PhotoImage(resized_image)
+                    # Create a button for the card
+                    card_button = ttk.Button(self.board_frame, image=photo_image,
+                                             command=lambda i=i, j=j: self.controller.on_card_click((i, j)))
+                    card_button.image = photo_image  # Keep a reference to the image
+                    card_button.grid(row=i, column=j, padx=5, pady=5)  # Place the button in the grid
+                else:
+                    print(f"Couldn't load image for card {i}, {j}")
 
     def update_board(self, card_position, show=False, permanent=False):
         # Get the card number from the board
         i, j = card_position
         card = self.model.board[i][j]
-        card_number = int(''.join(filter(str.isdigit, card))) # Extract the card number from the card string, only the digits
+        try:
+            card_number = int(
+                ''.join(filter(str.isdigit, card)))  # Extract the card number from the card string, only the digits
+        except ValueError:
+            print(f"Error: Couldn't extract card number from {card}")
+            return
 
         if show or permanent:
             if 0 <= card_number - 1 < len(self.model.card_images):
@@ -128,7 +141,7 @@ class GameView:
         button.image = photo_image
 
         if permanent:
-            button.config(state="disabled") # Disable the button if the card is matched
+            button.config(state="disabled")  # Disable the button if the card is matched
 
     def reset_cards(self, card1, card2):
         for card in [card1, card2]:
@@ -137,10 +150,10 @@ class GameView:
             photo_image = ImageTk.PhotoImage(resized_image)
             button = self.board_frame.grid_slaves(row=i, column=j)[0]
             button.config(image=photo_image)
-            button.image = photo_image # Reset the card image to hidden
+            button.image = photo_image  # Reset the card image to hidden
 
     def update_move_label(self, move_count):
-        self.move_label.config(text=f"Movimientos: {move_count}") # Update the move label with the move count
+        self.move_label.config(text=f"Movimientos: {move_count}")  # Update the move label with the move count
 
     def update_time_label(self, time_elapsed):
-        self.time_label.config(text=f"Tiempo: {time_elapsed} segundos") # Update the time label with the elapsed time
+        self.time_label.config(text=f"Tiempo: {time_elapsed} segundos")  # Update the time label with the elapsed time

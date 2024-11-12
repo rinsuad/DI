@@ -5,6 +5,7 @@ import time
 
 from recursos import descargar_imagen
 
+
 class GameModel:
     def __init__(self, difficulty, controller):
         # Initialize the game model
@@ -66,6 +67,11 @@ class GameModel:
                 "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/main/sprint3tkinter/assets/card8.JPG"),
         ]
 
+        # Verify that all images have been downloaded
+        if self.hidden_image is None or any(img is None for img in self.card_images):
+            print("Error al descargar una o más imágenes.")
+            return
+
         # Indicate that the images have been downloaded
         self.images_loaded.set()
 
@@ -99,10 +105,8 @@ class GameModel:
         scores = self.load_scores()
         scores[self.difficulty].append(score)
         scores[self.difficulty] = sorted(scores[self.difficulty], key=lambda x: x["moves"])[:3]
-        with open("ranking.txt", "w") as file:
-            for difficulty, scores_list in scores.items():
-                for score in scores_list:
-                    file.write(f"{score['name']},{score['difficulty']},{score['moves']},{score['date']}\n")
+        with open("ranking.txt", "a") as file:
+            file.write(f"{score['name']},{score['difficulty']},{score['moves']},{score['date']}\n")
 
     # Load the scores from the file
     def load_scores(self):
@@ -110,13 +114,16 @@ class GameModel:
         try:
             with open("ranking.txt", "r") as file:
                 for line in file:
-                    name, difficulty, moves, date = line.strip().split(",")
-                    scores[difficulty].append({
-                        "name": name,
-                        "difficulty": difficulty,
-                        "moves": int(moves),
-                        "date": date
-                    })
+                    try:
+                        name, difficulty, moves, date = line.strip().split(",")
+                        scores[difficulty].append({
+                            "name": name,
+                            "difficulty": difficulty,
+                            "moves": int(moves),
+                            "date": date
+                        })
+                    except ValueError:
+                        print(f"Error processing line: {line}")
         except FileNotFoundError:
-            pass
+            print("File does not exist. No scores loaded.")
         return scores
