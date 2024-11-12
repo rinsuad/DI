@@ -109,13 +109,19 @@ class GameController:
         self.update_move_count()  # Update the move count
 
         # Check if the game is over
-        if self.check_game_over():
+        if self.check_game_complete():
             self.stop_timer()  # Stop the timer
-            messagebox.showinfo("Game Over", "Congratulations! You've matched all pairs.")
-            self.game_window.destroy()  # Destroy the game window
-            self.show_stats_callback()  # Show the game statistics
+            messagebox.showinfo("Game Over", "Enhorabuena, has hecho todas las parejas!")  # Show a game over message
+            self.model.save_score(self.player_name)  # Save the player's score
+            self.return_to_main_menu()  # Return to the main menu
 
-    def check_game_over(self):
+    # Return to the main menu
+    def return_to_main_menu(self):
+        if self.game_window:
+            self.game_window.destroy()
+        self.main_menu.frame.pack()
+
+    def check_game_complete(self):
         # Check if all cards have been matched
         for row in self.model.board:
             for card in row:

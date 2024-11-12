@@ -1,3 +1,4 @@
+from datetime import datetime
 import random
 import threading
 import time
@@ -86,3 +87,36 @@ class GameModel:
     # Function to update the time label with the elapsed time
     def update_time(self):
         self.controller.game_view.update_time_label(self.time_elapsed)
+
+    # Save the player's score
+    def save_score(self, player_name):
+        score = {
+            "name": player_name,
+            "difficulty": self.difficulty,
+            "moves": self.move_count,
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        scores = self.load_scores()
+        scores[self.difficulty].append(score)
+        scores[self.difficulty] = sorted(scores[self.difficulty], key=lambda x: x["moves"])[:3]
+        with open("ranking.txt", "w") as file:
+            for difficulty, scores_list in scores.items():
+                for score in scores_list:
+                    file.write(f"{score['name']},{score['difficulty']},{score['moves']},{score['date']}\n")
+
+    # Load the scores from the file
+    def load_scores(self):
+        scores = {"facil": [], "medio": [], "dificil": []}
+        try:
+            with open("ranking.txt", "r") as file:
+                for line in file:
+                    name, difficulty, moves, date = line.strip().split(",")
+                    scores[difficulty].append({
+                        "name": name,
+                        "difficulty": difficulty,
+                        "moves": int(moves),
+                        "date": date
+                    })
+        except FileNotFoundError:
+            pass
+        return scores
