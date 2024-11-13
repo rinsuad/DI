@@ -22,9 +22,9 @@ class GameModel:
     # Generate the board based on the difficulty
     def _generate_board(self):
         sizes = {  # Board sizes for each difficulty
-            "facil": (2, 4),  # 2x4 board (8 cards)
-            "medio": (4, 4),  # 4x4 board (16 cards)
-            "dificil": (4, 6)  # 4x6 board (24 cards)
+            "facil": (4, 4),  # 4x4 board
+            "medio": (6, 6),  # 6x6 board
+            "dificil": (8, 8)  # 8x8 board
         }
         size = sizes[self.difficulty]  # Get the size based on the difficulty
         num_pairs = (size[0] * size[1]) // 2  # Number of pairs
