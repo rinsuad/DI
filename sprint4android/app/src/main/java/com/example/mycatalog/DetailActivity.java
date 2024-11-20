@@ -1,5 +1,6 @@
 package com.example.mycatalog;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -14,11 +15,22 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_detail);
-        ImageView imageView = findViewById(R.id.avatar);
 
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            setContentView(R.layout.detail_activity);
+        }
+        else {
+            setContentView(R.layout.activity_detail);
+        }
+        ImageView imageView = findViewById(R.id.avatar);
         Picasso.get().load(R.drawable.image)
                 .transform(new CircleTransform())
                 .into(imageView);
+
+
     }
 }
