@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#B39DDB</color> <!-- Lila pastel -->
+    <color name="colorPrimaryVariant">#9575CD</color> <!-- Lila más oscuro -->
+    <color name="colorAccent">#81D4FA</color> <!-- Azul pastel -->
+    <color name="colorBottomNavBackground">#FFFFFF</color> <!-- Blanco -->
+    <color name="colorBottomNavSelected">#FFB74D</color> <!-- Naranja suave -->
+    <color name="colorBottomNavUnselected">#B0BEC5</color> <!-- Gris claro -->
+    <color name="grey">#212121</color> <!-- Gris oscuro (en vez de negro puro) -->
 </resources>

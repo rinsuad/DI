@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MyCatalog" parent="Base.Theme.MyCatalog" />
+    <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@color/colorPrimary</item>
+        <item name="itemTextColor">@color/colorPrimary</item>
+        <item name="background">@color/colorBottomNavBackground</item>
+    </style>
+
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This app is a character catalog for the book series A Court of Thorns and Roses by Sarah J. Maas. It is built using Java and Android Studio. The app features a main activity that displays a list of characters and a detail activity that shows detailed information about each character. The user can navigate between different sections using a bottom navigation view, and the app includes smooth animations for fragment transitions."
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

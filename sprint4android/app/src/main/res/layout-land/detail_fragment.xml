@@ -6,9 +6,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".DetailFragment">
 
-    <!-- ScrollView para el contenido desplazable -->
+    <!-- ScrollView allows the content to be scrolled -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -18,48 +18,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- LinearLayout to display the elements -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Título -->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rhysand"
-                android:textSize="32sp"
-                android:textStyle="bold"
+                android:textSize="40sp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp" />
+                android:layout_marginBottom="16dp" />
 
-            <!-- Imagen -->
             <ImageView
                 android:id="@+id/avatar"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image" />
+                android:src="@drawable/image"
+                android:layout_marginBottom="16dp" />
 
-            <!-- Descripción -->
             <TextView
                 android:id="@+id/description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
                 android:text="Rhysand (pronounced Ree-sand[1]) is the most powerful High Lord in history and the current ruler of the Night Court, alongside Feyre Archeron.\n He is incredibly handsome and appears to be arrogant, careless, and cold at first. He meets Feyre when he saves her from three faeries at Calanmai. Not long after, he helps Feyre countless times throughout her trials Under the Mountain and goes as far as to fight for her in the final moments before she dies.\n When she is resurrected, their mating bond clicks into place, but he hides it from her in fear that it would scare her away. In the end, she accepts the mating bond and he swears Feyre in as his High Lady."
+                android:textSize="14sp"
+                android:textColor="@color/grey"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- Botón fijo al final de la pantalla -->
+    <!-- Button fixed at the bottom of the screen -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -67,7 +63,7 @@
         android:text="Me gusta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="25dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
