@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "663979560241",
+    "firebase_url": "https://myrecipes-23ff2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "myrecipes-23ff2",
+    "storage_bucket": "myrecipes-23ff2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663979560241:android:08b6ec31ebc2d21707b410",
+        "android_client_info": {
+          "package_name": "myrecipes.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEGDPbqt6L7AheBo_WvpGUdBvn1Qh_RCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
