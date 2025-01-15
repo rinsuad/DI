@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private TextView titleTextView, descriptionTextView;
+    private TextView titleTextView, descriptionTextView, caloriesTextView, categoryTextView, ingredientsTextView, stepsTextView;
     private ImageView imageView;
     private Button logoutButton;
     private FirebaseAuth mAuth;
@@ -35,6 +35,10 @@ public class DashboardActivity extends AppCompatActivity {
 
         titleTextView = findViewById(R.id.titleTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
+        caloriesTextView = findViewById(R.id.caloriesTextView);
+        categoryTextView = findViewById(R.id.categoryTextView);
+        ingredientsTextView = findViewById(R.id.ingredientsTextView);
+        stepsTextView = findViewById(R.id.stepsTextView);
         imageView = findViewById(R.id.imageView);
         logoutButton = findViewById(R.id.logoutButton);
 
@@ -48,17 +52,26 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void loadRecipeData() {
         // Cargar un único elemento desde Firebase
-        databaseRef.child("recipe1").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRef.child("avena_kinder_bueno").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String title = dataSnapshot.child("title").getValue(String.class);
                     String description = dataSnapshot.child("description").getValue(String.class);
-                    String imageUrl = dataSnapshot.child("image").getValue(String.class);
+                    String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
+                    //String calories = dataSnapshot.child("calorias_totales").getValue(String.class);
+                    String category = dataSnapshot.child("category").getValue(String.class);
+                    //String ingredients = dataSnapshot.child("ingredients").getValue(String.class);
+                    //String steps = dataSnapshot.child("steps").getValue(String.class);
 
                     titleTextView.setText(title);
                     descriptionTextView.setText(description);
                     Glide.with(DashboardActivity.this).load(imageUrl).into(imageView);
+                    //caloriesTextView.setText(calories);
+                    categoryTextView.setText(category);
+                    //ingredientsTextView.setText(ingredients);
+                    //stepsTextView.setText(steps);
+
                 } else {
                     Toast.makeText(DashboardActivity.this, "No se encontraron datos", Toast.LENGTH_SHORT).show();
                 }

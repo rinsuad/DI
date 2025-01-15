@@ -1,9 +1,16 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyRecipes" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<resources>
+    <!-- Tema para modo oscuro usando Material Components -->
+    <style name="Theme.MyRecipes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColorDark</item>
+        <item name="colorPrimaryVariant">@color/primaryColor</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/secondaryColorDark</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
 
-    <style name="Theme.MyRecipes" parent="Base.Theme.MyRecipes" />
+        <!-- Configuración de la barra de navegación para el modo oscuro -->
+        <item name="android:navigationBarColor">@color/primaryColorDark</item>
+        <item name="android:statusBarColor">@color/primaryColorDark</item>
+    </style>
 </resources>
