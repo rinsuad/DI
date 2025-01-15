@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class DashboardActivity extends AppCompatActivity {
 
     private TextView titleTextView, descriptionTextView, caloriesTextView, categoryTextView, ingredientsTextView, stepsTextView;
@@ -56,21 +58,45 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String title = dataSnapshot.child("title").getValue(String.class);
-                    String description = dataSnapshot.child("description").getValue(String.class);
-                    String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
-                    //String calories = dataSnapshot.child("calorias_totales").getValue(String.class);
-                    String category = dataSnapshot.child("category").getValue(String.class);
-                    //String ingredients = dataSnapshot.child("ingredients").getValue(String.class);
-                    //String steps = dataSnapshot.child("steps").getValue(String.class);
+                    try {
+                        // Obtener los valores de Firebase
+                        String title = (String) dataSnapshot.child("title").getValue();
+                        String description = (String) dataSnapshot.child("description").getValue();
+                        String imageUrl = (String) dataSnapshot.child("imageUrl").getValue();
+                        String category = (String) dataSnapshot.child("category").getValue();
 
-                    titleTextView.setText(title);
-                    descriptionTextView.setText(description);
-                    Glide.with(DashboardActivity.this).load(imageUrl).into(imageView);
-                    //caloriesTextView.setText(calories);
-                    categoryTextView.setText(category);
-                    //ingredientsTextView.setText(ingredients);
-                    //stepsTextView.setText(steps);
+                        // Verificar si los valores son numéricos y convertirlos a String
+                        Object caloriesObj = dataSnapshot.child("calorias_totales").getValue();
+                        String calories = (caloriesObj instanceof Long) ? String.valueOf(caloriesObj) : (String) caloriesObj;
+
+                        // Verificar los ingredientes
+                        Object ingredientsObj = dataSnapshot.child("ingredients").getValue();
+                        String ingredients = formatIngredientsList(ingredientsObj);
+
+                        // Verificar los pasos
+                        Object stepsObj = dataSnapshot.child("steps").getValue();
+                        String steps = formatStepsList(stepsObj);
+
+                        // Asignar los valores a los TextViews y la ImageView
+                        titleTextView.setText(title != null ? title : "Título no disponible");
+                        descriptionTextView.setText(description != null ? description : "Descripción no disponible");
+                        Glide.with(DashboardActivity.this).load(imageUrl).into(imageView);
+
+                        // Mostrar las calorías con el texto adicional
+                        caloriesTextView.setText("Calorías totales: " + (calories != null ? calories : "0"));
+
+                        // Mostrar la categoría con el texto adicional
+                        categoryTextView.setText("Categoría: " + (category != null ? category : "Categoría no disponible"));
+
+                        // Mostrar los ingredientes y los pasos con formato
+                        ingredientsTextView.setText(ingredients != null ? ingredients : "Ingredientes no disponibles");
+                        stepsTextView.setText(steps != null ? steps : "Pasos no disponibles");
+
+                    } catch (Exception e) {
+                        // Manejar cualquier error durante la obtención de los datos
+                        Toast.makeText(DashboardActivity.this, "Error al cargar los datos: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("DashboardActivity", "Error al obtener los datos", e);
+                    }
 
                 } else {
                     Toast.makeText(DashboardActivity.this, "No se encontraron datos", Toast.LENGTH_SHORT).show();
@@ -83,6 +109,58 @@ public class DashboardActivity extends AppCompatActivity {
                 Log.e("DashboardActivity", "Database error", databaseError.toException());
             }
         });
+    }
+
+    // Método para formatear los ingredientes con calorías y cantidad
+    private String formatIngredientsList(Object ingredientsObj) {
+        StringBuilder formattedIngredients = new StringBuilder();
+        if (ingredientsObj instanceof List) {
+            List<?> list = (List<?>) ingredientsObj;
+            for (Object item : list) {
+                if (item instanceof List) {
+                    List<?> ingredientDetails = (List<?>) item;
+                    if (ingredientDetails.size() == 3) {
+                        String ingredientName = ingredientDetails.get(0).toString();
+                        String calories = ingredientDetails.get(1).toString();
+                        String quantity = ingredientDetails.get(2).toString();
+                        formattedIngredients.append("- ").append(ingredientName).append(", ").append(calories).append(" calorías, ").append(quantity).append("\n");
+                    }
+                }
+            }
+        }
+        return formattedIngredients.toString();
+    }
+
+    // Método para formatear los pasos sin comillas
+    private String formatStepsList(Object stepsObj) {
+        StringBuilder formattedSteps = new StringBuilder();
+        if (stepsObj instanceof List) {
+            List<?> list = (List<?>) stepsObj;
+            for (Object step : list) {
+                if (step != null) {
+                    formattedSteps.append("- ").append(step.toString()).append("\n");
+                }
+            }
+        } else if (stepsObj instanceof String) {
+            formattedSteps.append(stepsObj.toString());
+        }
+        return formattedSteps.toString();
+    }
+
+    // Método para formatear pasos si es necesario (lo mismo que antes)
+    private String formatList(Object listObj) {
+        StringBuilder formattedList = new StringBuilder();
+        if (listObj instanceof List) {
+            List<?> list = (List<?>) listObj;
+            for (Object item : list) {
+                if (item != null) {
+                    formattedList.append(item.toString()).append("\n");
+                }
+            }
+        } else if (listObj instanceof String) {
+            formattedList.append(listObj.toString());
+        }
+        return formattedList.toString();
     }
 
     private void logout() {
