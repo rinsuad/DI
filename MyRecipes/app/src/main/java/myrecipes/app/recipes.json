@@ -1,0 +1,641 @@
+{
+  "recipes": {
+    "avena_kinder_bueno": {
+      "category": "100-500cal, Dulce",
+      "description": "Avena del día anterior inspirada en el sabor Kinder Bueno, con un topping cremoso y delicioso.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "section": "Base",
+          "items": [
+            {
+              "ingrediente": "Avena",
+              "cantidad": "45 gramos",
+              "calorias": 170
+            },
+            {
+              "ingrediente": "Polvo de proteína de chocolate blanco",
+              "cantidad": "15 gramos",
+              "calorias": 60
+            },
+            {
+              "ingrediente": "Semillas de chía",
+              "cantidad": "1 cucharadita",
+              "calorias": 20
+            },
+            {
+              "ingrediente": "Yogur ligero",
+              "cantidad": "30 gramos",
+              "calorias": 20
+            },
+            {
+              "ingrediente": "Leche",
+              "cantidad": "100 ml",
+              "calorias": 40
+            }
+          ]
+        },
+        {
+          "section": "Topping",
+          "items": [
+            {
+              "ingrediente": "Yogur",
+              "cantidad": "70 gramos",
+              "calorias": 50
+            },
+            {
+              "ingrediente": "Polvo de proteína de chocolate blanco",
+              "cantidad": "10 gramos",
+              "calorias": 40
+            },
+            {
+              "ingrediente": "Nutella / Crema de avellanas",
+              "cantidad": "10 gramos",
+              "calorias": 55
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "Mezclar todos los ingredientes base en un bol.",
+        "Dejar reposar 5 minutos para que infle.",
+        "Para el topping, mezclar el yogur con los polvos de proteína.",
+        "Añadir una cucharadita de leche si la mezcla queda muy espesa.",
+        "Esparcir el topping sobre la mezcla de avena.",
+        "Agregar la Nutella o crema de avellanas por encima.",
+        "Dejar en la nevera algunas horas o toda la noche."
+      ],
+      "title": "Avena del día anterior Kinder Bueno",
+      "calorias_totales": 455
+    },
+    "bizcocho_choco_fit": {
+      "category": "1000-1500cal, 500-1000cal, >1500cal, Alto en proteína, Dulce, Protein Powder Friendly",
+      "description": "Bizcocho de chocolate fit, rico en proteínas y fácil de preparar, ideal para satisfacer antojos de dulce de manera más saludable.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Huevos",
+          "cantidad": "3",
+          "calorias": 210
+        },
+        {
+          "ingrediente": "Plátanos",
+          "cantidad": "3",
+          "calorias": 315
+        },
+        {
+          "ingrediente": "Crema de cacahuete",
+          "cantidad": "1/2 taza",
+          "calorias": 750
+        },
+        {
+          "ingrediente": "Cacao desgrasado",
+          "cantidad": "1/2 taza",
+          "calorias": 50
+        },
+        {
+          "ingrediente": "Harina",
+          "cantidad": "1/4 taza",
+          "calorias": 110
+        },
+        {
+          "ingrediente": "Chispas de chocolate",
+          "cantidad": "1/4 taza",
+          "calorias": 200
+        },
+        {
+          "ingrediente": "Levadura",
+          "cantidad": "Cantidad al gusto",
+          "calorias": 5
+        }
+      ],
+      "steps": [
+        "Batir los huevos y machacar los plátanos junto con la crema de cacahuete.",
+        "Añadir el cacao, la harina y la levadura a la mezcla.",
+        "Incorporar las chispas de chocolate como último ingrediente.",
+        "Verter la mezcla en un molde para hornear.",
+        "Hornear durante 35 minutos a 180 grados."
+      ],
+      "title": "Bizcocho Choco-Fit",
+      "calorias_totales": 1640
+    },
+    "bizcocho_chocolate_y_yogurt": {
+      "category": "100-500cal, Dulce",
+      "description": "Bizcocho ligero de chocolate y yogur, perfecto para un postre dulce y bajo en calorías.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Huevo",
+          "cantidad": "1",
+          "calorias": 70
+        },
+        {
+          "ingrediente": "Azúcar",
+          "cantidad": "25 gramos",
+          "calorias": 100
+        },
+        {
+          "ingrediente": "Yogurt griego",
+          "cantidad": "50 gramos",
+          "calorias": 59
+        },
+        {
+          "ingrediente": "Harina/maicena",
+          "cantidad": "25 gramos",
+          "calorias": 91
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "15 gramos",
+          "calorias": 34
+        },
+        {
+          "ingrediente": "Levadura",
+          "cantidad": "1 cucharadita",
+          "calorias": 5
+        }
+      ],
+      "topping": [
+        {
+          "ingrediente": "Yogurt griego",
+          "cantidad": "50 gramos",
+          "calorias": 59
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "1 cucharadita",
+          "calorias": 8
+        },
+        {
+          "ingrediente": "Azúcar",
+          "cantidad": "2 cucharaditas",
+          "calorias": 32
+        }
+      ],
+      "steps": [
+        "Mezclar el yogur, el cacao y el azúcar para la cobertura y guardarlo en la nevera.",
+        "Batir los huevos y el endulzante hasta que estén esponjosos.",
+        "Añadir el yogur, la harina y el cacao, mezclando con movimientos envolventes.",
+        "Hornear a 180 grados durante 15-18 minutos.",
+        "Esperar a que enfríe antes de añadir la cobertura preparada previamente."
+      ],
+      "title": "Bizcocho Chocolate y Yogurt",
+      "calorias_totales": 458
+    },
+    "bizcocho_avena_y_platano": {
+      "category": "500-1000cal, Dulce",
+      "description": "Bizcocho fácil y nutritivo de avena y plátano, perfecto para un desayuno o merienda saludable.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Avena",
+          "cantidad": "1 taza",
+          "calorias": 154
+        },
+        {
+          "ingrediente": "Leche",
+          "cantidad": "1/2 taza",
+          "calorias": 61
+        },
+        {
+          "ingrediente": "Plátano muy maduro",
+          "cantidad": "1",
+          "calorias": 105
+        },
+        {
+          "ingrediente": "Canela",
+          "cantidad": "1/2 cucharadita",
+          "calorias": 3
+        },
+        {
+          "ingrediente": "Levadura",
+          "cantidad": "1 cucharadita",
+          "calorias": 2
+        },
+        {
+          "ingrediente": "Chips de chocolate",
+          "cantidad": "1/4 taza",
+          "calorias": 200
+        }
+      ],
+      "steps": [
+        "Machacar el plátano hasta que no queden grumos.",
+        "Mezclar todos los ingredientes en un bol o directamente en el molde que vayas a usar.",
+        "Poner plátanos en rodajas y chocolate por encima.",
+        "Hornear a 180 grados durante 20-30 minutos."
+      ],
+      "title": "Bizcocho de Avena y Plátano",
+      "calorias_totales": 525
+    },
+    "bocaditos_de_fruta": {
+      "category": "100-500cal, Dulce, low calorie snack",
+      "description": "Deliciosos bocaditos de fruta congelada con yogur, cacao y pepitas de chocolate, perfectos para un snack bajo en calorías.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Plátano",
+          "cantidad": "1 mediano",
+          "calorias": 105
+        },
+        {
+          "ingrediente": "Yogurt",
+          "cantidad": "4 cucharadas (aproximadamente 60g)",
+          "calorias": 35
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "1 cucharada",
+          "calorias": 12
+        },
+        {
+          "ingrediente": "Pepitas de chocolate",
+          "cantidad": "1 cucharada (aproximadamente 15g)",
+          "calorias": 70
+        }
+      ],
+      "steps": [
+        "Colocar rodajas o trocitos de plátano sobre papel de horno.",
+        "Mezclar el yogur con el cacao y colocar un poco sobre cada trozo de plátano.",
+        "Agregar pepitas de chocolate por encima.",
+        "Dejar en el congelador durante unas horas hasta que estén firmes."
+      ],
+      "title": "Bocaditos de Fruta",
+      "calorias_totales_por_porcion": 222
+    },
+    "brownie_chocolate_harina_arroz": {
+      "category": "1000-1500cal, Dulce",
+      "description": "Brownie de chocolate hecho con harina de arroz glutinoso, ideal para un postre dulce y consistente.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Margarina",
+          "cantidad": "40g",
+          "calorias": 300
+        },
+        {
+          "ingrediente": "Huevo",
+          "cantidad": "1",
+          "calorias": 70
+        },
+        {
+          "ingrediente": "Leche",
+          "cantidad": "180mL",
+          "calorias": 90
+        },
+        {
+          "ingrediente": "Edulcorante",
+          "cantidad": "80g",
+          "calorias": 0
+        },
+        {
+          "ingrediente": "Chocolate negro",
+          "cantidad": "60g",
+          "calorias": 300
+        },
+        {
+          "ingrediente": "Harina de arroz glutinoso",
+          "cantidad": "100g",
+          "calorias": 360
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "10g",
+          "calorias": 20
+        },
+        {
+          "ingrediente": "Proteína de chocolate",
+          "cantidad": "35g",
+          "calorias": 140
+        },
+        {
+          "ingrediente": "Café",
+          "cantidad": "Al gusto",
+          "calorias": 0
+        },
+        {
+          "ingrediente": "Sal",
+          "cantidad": "Una pizca",
+          "calorias": 0
+        }
+      ],
+      "steps": [
+        "Derrite el chocolate con la margarina.",
+        "Agrega el huevo, la leche y el café a la mezcla derretida.",
+        "Mezcla todos los ingredientes secos por separado.",
+        "Incorpora los ingredientes húmedos a los secos, ajustando la cantidad de leche según sea necesario dependiendo del tipo de proteína utilizada.",
+        "Vierte la mezcla en un molde para hornear.",
+        "Hornea a 150 grados Celsius durante 50 minutos."
+      ],
+      "title": "Brownie de Chocolate con Harina de Arroz",
+      "calorias_totales": 1280
+    },
+    "chocolate_chip_baked_oats": {
+      "category": "100-500cal, Dulce",
+      "description": "Un desayuno dulce y saludable de avena horneada con trozos de chocolate.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Harina de avena",
+          "cantidad": "40g",
+          "calorias": 150
+        },
+        {
+          "ingrediente": "Proteína de vainilla",
+          "cantidad": "25g",
+          "calorias": 100
+        },
+        {
+          "ingrediente": "Yogur griego light",
+          "cantidad": "50g",
+          "calorias": 30
+        },
+        {
+          "ingrediente": "Levadura",
+          "cantidad": "1.5 cucharadas",
+          "calorias": 10
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "10g",
+          "calorias": 25
+        },
+        {
+          "ingrediente": "Trozos de chocolate",
+          "cantidad": "20g",
+          "calorias": 100
+        }
+      ],
+      "steps": [
+        "Mezclar todos los ingredientes salvo el cacao.",
+        "Mezclar el cacao con un poco de agua y edulcorante hasta obtener una pasta similar a Nutella.",
+        "Colocar la masa en un molde y añadir la pasta de chocolate en el centro.",
+        "Decorar con los trozos de chocolate.",
+        "Hornear a 180 grados Celsius durante 20 minutos."
+      ],
+      "title": "Chocolate Chip Baked Oats",
+      "calorias_totales": 415
+    },
+    "kit_kat_protein_dessert": {
+      "category": "100-500cal, Cena, Dulce",
+      "description": "Un postre proteico inspirado en el Kit Kat, ideal para una cena ligera y dulce.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Yogur griego light",
+          "cantidad": "250g",
+          "calorias": 150
+        },
+        {
+          "ingrediente": "Proteína en polvo de vainilla",
+          "cantidad": "15g",
+          "calorias": 60
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "10g",
+          "calorias": 25
+        },
+        {
+          "ingrediente": "Tortitas de arroz",
+          "cantidad": "3 unidades",
+          "calorias": 105
+        },
+        {
+          "ingrediente": "Chocolate negro",
+          "cantidad": "10g",
+          "calorias": 55
+        },
+        {
+          "ingrediente": "Edulcorante",
+          "cantidad": "Al gusto",
+          "calorias": 0
+        }
+      ],
+      "steps": [
+        "Mezclar el yogur con la proteína en polvo y el edulcorante.",
+        "Mezclar el cacao con un poco de agua hasta obtener una consistencia untable.",
+        "Hacer una capa con 1/3 de la mezcla de yogur.",
+        "Colocar una tortita de arroz sobre la capa de yogur y cubrirla con una capa de cacao.",
+        "Repetir el proceso hasta agotar los ingredientes.",
+        "Derretir el chocolate negro y verterlo sobre la última capa.",
+        "Dejar el postre en la nevera hasta que esté sólido."
+      ],
+      "title": "Kit Kat Protein Dessert",
+      "calorias_totales": 395
+    },
+    "muffins_platano": {
+      "category": "1000-1500cal, Dulce",
+      "description": "Muffins de plátano con chocolate negro, ideales para un desayuno o snack energético y delicioso.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Plátanos pequeños o grandes",
+          "cantidad": "3 pequeños o 2 grandes",
+          "calorias": 270
+        },
+        {
+          "ingrediente": "Harina (blanca o integral)",
+          "cantidad": "140g",
+          "calorias": 480
+        },
+        {
+          "ingrediente": "Aceite de oliva virgen extra",
+          "cantidad": "40g",
+          "calorias": 360
+        },
+        {
+          "ingrediente": "Chocolate negro",
+          "cantidad": "60g",
+          "calorias": 320
+        },
+        {
+          "ingrediente": "Levadura",
+          "cantidad": "1 cucharadita",
+          "calorias": 5
+        },
+        {
+          "ingrediente": "Huevos",
+          "cantidad": "2",
+          "calorias": 140
+        },
+        {
+          "ingrediente": "Sal",
+          "cantidad": "Una pizca",
+          "calorias": 0
+        }
+      ],
+      "steps": [
+        "Aplasta los plátanos, cuanto más maduros, mejor.",
+        "Mezcla los plátanos aplastados con los huevos y el aceite de oliva.",
+        "Agrega los ingredientes secos (harina, levadura) y el chocolate troceado.",
+        "Hornea a 180 grados Celsius durante 35-40 minutos.",
+        "Antes de servir, agrega una pizca de sal por encima."
+      ],
+      "title": "Muffins de Plátano",
+      "calorias_totales": 1575
+    },
+    "mug_brownie": {
+      "category": "100-500cal, Alto en proteína, Cena, Dulce",
+      "description": "Un mug brownie delicioso y rápido, perfecto para una merienda o postre con alto contenido proteico.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Proteína en polvo",
+          "cantidad": "1/4 taza (32-34g)",
+          "calorias": 140
+        },
+        {
+          "ingrediente": "Harina",
+          "cantidad": "1 cucharada",
+          "calorias": 60
+        },
+        {
+          "ingrediente": "Edulcorante granulado",
+          "cantidad": "2 cucharadas",
+          "calorias": 10
+        },
+        {
+          "ingrediente": "Levadura en polvo",
+          "cantidad": "1/2 cucharadita",
+          "calorias": 3
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "1 y 1/2 cucharadas (12g)",
+          "calorias": 28
+        },
+        {
+          "ingrediente": "Huevo grande",
+          "cantidad": "1",
+          "calorias": 72
+        },
+        {
+          "ingrediente": "Leche",
+          "cantidad": "1/4 taza (60ml)",
+          "calorias": 25
+        },
+        {
+          "ingrediente": "Chips de chocolate",
+          "cantidad": "1 cucharada (opcional, 15g)",
+          "calorias": 75
+        }
+      ],
+      "steps": [
+        "Mezcla todos los ingredientes en una taza.",
+        "Coloca la taza en el microondas y cocina durante 1 minuto."
+      ],
+      "title": "Mug Brownie",
+      "calorias_totales": 393
+    },
+    "oreo_cheesecake": {
+      "category": ">1500cal, Dulce",
+      "description": "Deliciosa cheesecake de oreo, con una base crujiente y una capa cremosa de queso.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Galletas Oreo",
+          "cantidad": "15 unidades",
+          "calorias": 780
+        },
+        {
+          "ingrediente": "Queso crema bajo en grasa",
+          "cantidad": "500g",
+          "calorias": 400
+        },
+        {
+          "ingrediente": "Proteína de chocolate",
+          "cantidad": "25g",
+          "calorias": 100
+        },
+        {
+          "ingrediente": "Margarina",
+          "cantidad": "25g",
+          "calorias": 180
+        },
+        {
+          "ingrediente": "Leche",
+          "cantidad": "100ml",
+          "calorias": 42
+        },
+        {
+          "ingrediente": "Huevos",
+          "cantidad": "2",
+          "calorias": 144
+        },
+        {
+          "ingrediente": "Yogur griego 0%",
+          "cantidad": "150g",
+          "calorias": 89
+        },
+        {
+          "ingrediente": "Harina de avena",
+          "cantidad": "90g",
+          "calorias": 350
+        }
+      ],
+      "steps": [
+        "Toma 10 galletas Oreo y separa la parte negra de la blanca.",
+        "Aplasta las galletas negras y mézclalas con la harina de avena, la proteína de chocolate, la leche y la margarina derretida.",
+        "Funde la parte blanca de las galletas y mézclala con el queso crema, el yogur griego y los huevos.",
+        "Aplasta las otras 5 galletas Oreo y mézclalas con la mezcla de queso crema.",
+        "Coloca una capa de la mezcla oscura de galletas como base en el molde.",
+        "Cubre con la mezcla de queso crema.",
+        "Hornea durante 30-40 minutos a 180°C, asegurándote de que la capa superior esté completamente cocinada.",
+        "Espolvorea un poco de cacao en polvo al finalizar."
+      ],
+      "title": "Oreo Cheesecake",
+      "calorias_totales": 2085
+    },
+    "nutella": {
+      "category": "1000-1500cal, Dulce",
+      "description": "Una versión casera de Nutella, rica en proteínas y hecha con garbanzos y avellanas tostadas.",
+      "imageUrl": "",
+      "ingredients": [
+        {
+          "ingrediente": "Garbanzos",
+          "cantidad": "1 bote",
+          "calorias": 270
+        },
+        {
+          "ingrediente": "Cacao en polvo",
+          "cantidad": "3 cucharadas",
+          "calorias": 60
+        },
+        {
+          "ingrediente": "Edulcorante",
+          "cantidad": "1 cucharada",
+          "calorias": 0
+        },
+        {
+          "ingrediente": "Avellanas tostadas",
+          "cantidad": "100g",
+          "calorias": 628
+        },
+        {
+          "ingrediente": "Agua hirviendo",
+          "cantidad": "350ml",
+          "calorias": 0
+        },
+        {
+          "ingrediente": "Polvo de proteína",
+          "cantidad": "1 scoop",
+          "calorias": 100
+        }
+      ],
+      "steps": [
+        "Precalienta el horno a 200 grados Celsius y hornea los garbanzos durante 15 minutos.",
+        "Una vez cocidos, colócalos en un procesador de alimentos junto con el agua hirviendo, edulcorante, avellanas y cacao.",
+        "Tritura la mezcla hasta obtener una textura casi líquida y sin grumos.",
+        "Añade el scoop de proteína (preferentemente de chocolate o sin sabor), mezcla bien y listo."
+      ],
+      "title": "Nutella Casera",
+      "calorias_totales": 1058
+    }
+  },
+  "users": {
+    "bWtwd9jd7vQstmH0h1opgT8yFdw1": {
+      "email": "b@b.com",
+      "uid": "bWtwd9jd7vQstmH0h1opgT8yFdw1"
+    }
+  }
+}
