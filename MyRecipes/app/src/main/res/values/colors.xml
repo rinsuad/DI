@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="backgroundColor">#17191c</color>
-    <color name="primaryColor">#474f57</color>
-    <color name="primaryColorDark">#1c1f22</color>
-    <color name="secondaryColor">#606e7a</color>
-    <color name="secondaryColorDark">#2b2b2b</color>
-    <color name="colorAccent">#7b8995</color>
-    <color name="colorLogout">#0c0803</color>
-
+    <color name="backgroundColor">#2C2C2C</color>
+    <color name="primaryColor">#BB86FC</color>
+    <color name="primaryColorDark">#3700B3</color>
+    <color name="secondaryColor">#03DAC6</color>
+    <color name="secondaryColorDark">#018786</color>
+    <color name="colorAccent">#CF6679</color>
+    <color name="colorLogout">#B00020</color>
+    <color name="textColorPrimary">#E0E0E0</color>
+    <color name="textColorSecondary">#B0B0B0</color>
+    <color name="cardBackground">#3C3C3C</color>
+    <color name="inputBackground">#424242</color>
 </resources>
+

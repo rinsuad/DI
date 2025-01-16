@@ -6,6 +6,7 @@
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
@@ -16,87 +17,107 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <EditText
-                android:id="@+id/fullNameEditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fullNameInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre Completo"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="16dp">
 
-            <EditText
-                android:id="@+id/emailEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="16dp">
 
-            <EditText
-                android:id="@+id/passwordEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="16sp"/>
+                app:passwordToggleEnabled="true">
 
-            <EditText
-                android:id="@+id/confirmPasswordEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmPasswordInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirmar Contraseña"
-                android:inputType="textPassword"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="16sp"/>
+                app:passwordToggleEnabled="true">
 
-            <EditText
-                android:id="@+id/phoneEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmPasswordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Teléfono"
-                android:inputType="phone"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="16dp">
 
-            <EditText
-                android:id="@+id/addressEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addressInputLayout"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Dirección"
-                android:textColor="#000000"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginBottom="24dp"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="24dp">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
+                style="@style/CustomButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrar"
-                android:textColor="#FFFFFF"
-                android:background="@color/primaryColor"
-                android:textSize="16sp"
-                android:padding="14dp" />
+                android:text="Registrar"/>
 
         </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
