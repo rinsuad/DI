@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,6 +61,46 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Todos los campos son obligatorios.", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //Validar nombre
+        if (fullName.length() < 3 || !fullName.matches("[a-zA-Z ]+")) {
+            Toast.makeText(this, "El nombre debe tener al menos 3 caracteres y contener solo letras.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar formato del correo electrónico
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "El correo electrónico no es válido. Debe tener un formato a@a.com", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar longitud de la contraseña
+        if (password.length() < 6) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar coincidencia de contraseñas
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar número de teléfono (ejemplo: al menos 10 dígitos)
+        if (phone.length() < 10 || !phone.matches("\\d+")) {
+            Toast.makeText(this, "El número de teléfono debe tener al menos 10 dígitos y contener solo números.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar longitud mínima de la dirección
+        if (address.length() < 10) {
+            Toast.makeText(this, "La dirección debe tener al menos 10 caracteres.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Si todas las validaciones pasan
+        Toast.makeText(this, "Validaciones completadas exitosamente. Registrando usuario.", Toast.LENGTH_SHORT).show();
+
 
         if (!password.equals(confirmPassword)) {
             Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
