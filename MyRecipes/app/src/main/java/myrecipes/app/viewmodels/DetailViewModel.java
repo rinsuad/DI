@@ -1,19 +1,19 @@
-package myrecipes.app.viewmodels;
+/*package myrecipes.app.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import myrecipes.app.models.Recipe;
-import myrecipes.app.repositories.RecipeRepository;
+import myrecipes.app.repositories.DashboardRepository;
 
 public class DetailViewModel extends ViewModel {
-    private final RecipeRepository repository;
+    private final DashboardRepository repository;
     private final MutableLiveData<Recipe> recipe;
     private final MutableLiveData<String> error;
     private final MutableLiveData<Boolean> loading;
 
     public DetailViewModel() {
-        repository = new RecipeRepository();
+        repository = new DashboardRepository();
         recipe = new MutableLiveData<>();
         error = new MutableLiveData<>();
         loading = new MutableLiveData<>();
@@ -35,4 +35,4 @@ public class DetailViewModel extends ViewModel {
                     loading.setValue(false);
                 });
     }
-}
+}*/
