@@ -2,54 +2,73 @@ package myrecipes.app.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-import myrecipes.app.R;
-import myrecipes.app.adapters.RecipeAdapter;
+import myrecipes.app.databinding.ActivityDashboardBinding;
 import myrecipes.app.models.Recipe;
-import myrecipes.app.viewmodels.DashboardViewModel;
+import myrecipes.app.viewmodels.DetailViewModel;
 
-public class DashboardActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
-    private DashboardViewModel viewModel;
-    private RecipeAdapter adapter;
-    private RecyclerView recyclerView;
+
+public class DashboardActivity extends AppCompatActivity {
+    private ActivityDashboardBinding binding;
+    private DetailViewModel viewModel;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Inicializar RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecipeAdapter(this);
-        recyclerView.setAdapter(adapter);
+        mAuth = FirebaseAuth.getInstance();
+        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
 
-        // Inicializar ViewModel
-        viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        setupObservers();
+        setupListeners();
 
-        // Observar cambios en la lista de recetas
-        viewModel.getRecipes().observe(this, recipes -> {
-            adapter.setRecipes(recipes);
-        });
+        viewModel.loadRecipe("avena_kinder_bueno");
+    }
 
-        // Configurar botón de logout
-        findViewById(R.id.logoutButton).setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+    private void setupObservers() {
+        viewModel.getRecipe().observe(this, this::updateUI);
+
+        viewModel.getError().observe(this, errorMessage ->
+                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        );
+
+        viewModel.getLoading().observe(this, isLoading -> {
+            // Implementar loading si es necesario
         });
     }
 
+    private void setupListeners() {
+        binding.logoutButton.setOnClickListener(v -> logout());
+    }
+
+    private void updateUI(Recipe recipe) {
+        binding.titleTextView.setText(recipe.getTitle());
+        binding.descriptionTextView.setText(recipe.getDescription());
+
+        Glide.with(this)
+                .load(recipe.getImageUrl())
+                .into(binding.imageView);
+    }
+
+    private void logout() {
+        mAuth.signOut();
+        startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+        finish();
+    }
+
     @Override
-    public void onRecipeClick(Recipe recipe) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("recipe_id", recipe.getId());
-        startActivity(intent);
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

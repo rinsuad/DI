@@ -5,36 +5,34 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import myrecipes.app.models.Recipe;
 import myrecipes.app.repositories.RecipeRepository;
-import myrecipes.app.utils.ViewState;
 
 public class DetailViewModel extends ViewModel {
-    private final RecipeRepository recipeRepository;
-    private final MutableLiveData<ViewState<Recipe>> recipeState;
+    private final RecipeRepository repository;
+    private final MutableLiveData<Recipe> recipe;
+    private final MutableLiveData<String> error;
+    private final MutableLiveData<Boolean> loading;
 
     public DetailViewModel() {
-        recipeRepository = RecipeRepository.getInstance();
-        recipeState = new MutableLiveData<>();
+        repository = new RecipeRepository();
+        recipe = new MutableLiveData<>();
+        error = new MutableLiveData<>();
+        loading = new MutableLiveData<>();
     }
+
+    public LiveData<Recipe> getRecipe() { return recipe; }
+    public LiveData<String> getError() { return error; }
+    public LiveData<Boolean> getLoading() { return loading; }
 
     public void loadRecipe(String recipeId) {
-        recipeState.setValue(new ViewState.Loading<>());
-
-        // Observar el LiveData que retorna el repository
-        recipeRepository.getRecipeById(recipeId).observeForever(recipe -> {
-            if (recipe != null) {
-                recipeState.setValue(new ViewState.Success<>(recipe));
-            } else {
-                recipeState.setValue(new ViewState.Error<>("Recipe not found"));
-            }
-        });
-    }
-
-    public LiveData<ViewState<Recipe>> getRecipeState() {
-        return recipeState;
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
+        loading.setValue(true);
+        repository.getRecipe(recipeId)
+                .addOnSuccessListener(result -> {
+                    recipe.setValue(result);
+                    loading.setValue(false);
+                })
+                .addOnFailureListener(e -> {
+                    error.setValue(e.getMessage());
+                    loading.setValue(false);
+                });
     }
 }

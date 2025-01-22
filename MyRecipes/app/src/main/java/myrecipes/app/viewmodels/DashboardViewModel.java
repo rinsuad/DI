@@ -12,7 +12,6 @@ public class DashboardViewModel extends ViewModel {
 
     public DashboardViewModel() {
         recipeRepository = RecipeRepository.getInstance();
-        recipes = recipeRepository.getAllRecipes();
     }
 
     public LiveData<List<Recipe>> getRecipes() {

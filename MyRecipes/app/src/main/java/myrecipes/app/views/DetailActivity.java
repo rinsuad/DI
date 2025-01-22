@@ -1,4 +1,4 @@
-package myrecipes.app.views;
+/*package myrecipes.app.views;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import myrecipes.app.R;
 import myrecipes.app.models.Recipe;
-import myrecipes.app.utils.ViewState;
 import myrecipes.app.viewmodels.DetailViewModel;
 
 public class DetailActivity extends AppCompatActivity {
@@ -43,7 +42,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-        viewModel.getRecipeState().observe(this, this::handleRecipeState);
     }
 
     private void loadRecipeData() {
@@ -53,18 +51,6 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
         viewModel.loadRecipe(recipeId);
-    }
-
-    private void handleRecipeState(ViewState<Recipe> state) {
-        if (state instanceof ViewState.Loading) {
-            showLoading();
-        } else if (state instanceof ViewState.Success) {
-            Recipe recipe = ((ViewState.Success<Recipe>) state).getData();
-            showRecipe(recipe);
-        } else if (state instanceof ViewState.Error) {
-            String message = ((ViewState.Error<Recipe>) state).getMessage();
-            showError(message);
-        }
     }
 
     private void showLoading() {
@@ -92,4 +78,4 @@ public class DetailActivity extends AppCompatActivity {
         errorGroup.setVisibility(View.VISIBLE);
         errorMessageTextView.setText(message);
     }
-}
+}*/
