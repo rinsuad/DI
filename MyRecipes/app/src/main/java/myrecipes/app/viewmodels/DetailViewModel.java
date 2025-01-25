@@ -1,4 +1,4 @@
-/*package myrecipes.app.viewmodels;
+package myrecipes.app.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,15 +8,12 @@ import myrecipes.app.repositories.DashboardRepository;
 
 public class DetailViewModel extends ViewModel {
     private final DashboardRepository repository;
-    private final MutableLiveData<Recipe> recipe;
-    private final MutableLiveData<String> error;
-    private final MutableLiveData<Boolean> loading;
+    private final MutableLiveData<Recipe> recipe = new MutableLiveData<>();
+    private final MutableLiveData<String> error = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     public DetailViewModel() {
         repository = new DashboardRepository();
-        recipe = new MutableLiveData<>();
-        error = new MutableLiveData<>();
-        loading = new MutableLiveData<>();
     }
 
     public LiveData<Recipe> getRecipe() { return recipe; }
@@ -25,14 +22,13 @@ public class DetailViewModel extends ViewModel {
 
     public void loadRecipe(String recipeId) {
         loading.setValue(true);
-        repository.getRecipe(recipeId)
-                .addOnSuccessListener(result -> {
-                    recipe.setValue(result);
-                    loading.setValue(false);
-                })
-                .addOnFailureListener(e -> {
-                    error.setValue(e.getMessage());
-                    loading.setValue(false);
-                });
+        MutableLiveData<Recipe> tempRecipeLiveData = new MutableLiveData<>();
+
+        tempRecipeLiveData.observeForever(loadedRecipe -> {
+            recipe.setValue(loadedRecipe);
+            loading.setValue(false);
+        });
+
+        repository.getSingleRecipe(recipeId, tempRecipeLiveData);
     }
-}*/
+}

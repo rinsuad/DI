@@ -1,11 +1,10 @@
-/*package myrecipes.app.views;
+package myrecipes.app.views;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
@@ -15,13 +14,9 @@ import myrecipes.app.viewmodels.DetailViewModel;
 
 public class DetailActivity extends AppCompatActivity {
     private DetailViewModel viewModel;
-    private ImageView recipeImageView;
-    private TextView titleTextView;
-    private TextView descriptionTextView;
-    private TextView errorMessageTextView;
-    private ProgressBar progressBar;
-    private ViewGroup contentGroup;
-    private ViewGroup errorGroup;
+    private ImageView imageView;
+    private TextView titleTextView, descriptionTextView;
+    private LinearLayout ingredientsContainer, stepsContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,52 +25,35 @@ public class DetailActivity extends AppCompatActivity {
 
         initializeViews();
         setupViewModel();
-        loadRecipeData();
     }
 
     private void initializeViews() {
-        recipeImageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
         titleTextView = findViewById(R.id.titleTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
-        contentGroup = findViewById(R.id.contentGroup);
+        ingredientsContainer = findViewById(R.id.ingredientsContainer);
+        stepsContainer = findViewById(R.id.stepsContainer);
     }
 
     private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-    }
 
-    private void loadRecipeData() {
-        String recipeId = getIntent().getStringExtra("recipe_id");
-        if (recipeId == null) {
-            showError("Invalid recipe ID");
-            return;
+        String recipeId = getIntent().getStringExtra("RECIPE_ID");
+        if (recipeId != null) {
+            viewModel.loadRecipe(recipeId);
+
+            viewModel.getRecipe().observe(this, this::displayRecipeDetails);
         }
-        viewModel.loadRecipe(recipeId);
     }
 
-    private void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-        contentGroup.setVisibility(View.GONE);
-        errorGroup.setVisibility(View.GONE);
-    }
-
-    private void showRecipe(Recipe recipe) {
-        progressBar.setVisibility(View.GONE);
-        contentGroup.setVisibility(View.VISIBLE);
-        errorGroup.setVisibility(View.GONE);
-
+    private void displayRecipeDetails(Recipe recipe) {
         titleTextView.setText(recipe.getTitle());
         descriptionTextView.setText(recipe.getDescription());
 
         Glide.with(this)
                 .load(recipe.getImageUrl())
-                .into(recipeImageView);
-    }
+                .into(imageView);
 
-    private void showError(String message) {
-        progressBar.setVisibility(View.GONE);
-        contentGroup.setVisibility(View.GONE);
-        errorGroup.setVisibility(View.VISIBLE);
-        errorMessageTextView.setText(message);
+        //  need to extend this to handle ingredients and steps
     }
-}*/
+}

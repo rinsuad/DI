@@ -1,64 +1,65 @@
 package myrecipes.app.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import myrecipes.app.R;
-import myrecipes.app.databinding.ItemRecipeBinding;
 import myrecipes.app.models.Recipe;
 
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private List<Recipe> recipes;
+    private OnRecipeClickListener clickListener;
 
-    public RecipeAdapter(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public interface OnRecipeClickListener {
+        void onRecipeClick(Recipe recipe);
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public RecipeAdapter(List<Recipe> recipes, OnRecipeClickListener listener) {
         this.recipes = recipes;
-        notifyDataSetChanged();
+        this.clickListener = listener;
     }
 
     @NonNull
     @Override
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemRecipeBinding binding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.item_recipe,
-                parent,
-                false
-        );
-        return new RecipeViewHolder(binding);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_recipe, parent, false);
+        return new RecipeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
-        holder.bind(recipe);
+        holder.titleTextView.setText(recipe.getTitle());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onRecipeClick(recipe);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return recipes != null ? recipes.size() : 0;
+        return recipes.size();
     }
 
     static class RecipeViewHolder extends RecyclerView.ViewHolder {
-        private final ItemRecipeBinding binding;
+        TextView titleTextView;
 
-        public RecipeViewHolder(@NonNull ItemRecipeBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        RecipeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleTextView = itemView.findViewById(R.id.recipeTitleTextView);
         }
+    }
 
-        public void bind(Recipe recipe) {
-            binding.setRecipe(recipe);
-            binding.executePendingBindings();
-        }
+    public void updateRecipes(List<Recipe> newRecipes) {
+        this.recipes = newRecipes;
+        notifyDataSetChanged();
     }
 }
