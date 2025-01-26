@@ -1,5 +1,6 @@
 package myrecipes.app.repositories;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,14 +19,15 @@ public class DashboardRepository {
     }
 
     public void getRecipe(MutableLiveData<List<Recipe>> recipeLiveData) {
-        recipeRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("recipes");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Recipe> recipes = new ArrayList<>();
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    Recipe recipe = child.getValue(Recipe.class);
+                for (DataSnapshot recipeSnapshot : snapshot.getChildren()) {
+                    Recipe recipe = recipeSnapshot.getValue(Recipe.class);
                     if (recipe != null) {
-                        recipe.setId(child.getKey());  // Set the Firebase key as the recipe ID
+                        recipe.setId(recipeSnapshot.getKey());
                         recipes.add(recipe);
                     }
                 }
@@ -33,8 +35,8 @@ public class DashboardRepository {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Manejo de errores
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
             }
         });
     }

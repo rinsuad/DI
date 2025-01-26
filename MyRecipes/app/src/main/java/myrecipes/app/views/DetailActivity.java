@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.imageview.ShapeableImageView;
+
+import java.util.List;
+
 import myrecipes.app.R;
 import myrecipes.app.models.Recipe;
 import myrecipes.app.viewmodels.DetailViewModel;
@@ -70,9 +73,14 @@ public class DetailActivity extends AppCompatActivity {
 
         // Display Ingredients
         ingredientsContainer.removeAllViews();
-        for (String ingredient : recipe.getIngredientsList()) {
+        for (List<Object> ingredient : recipe.getIngredients()) {
             TextView ingredientTextView = new TextView(this);
-            ingredientTextView.setText("• " + ingredient);
+
+            // Assuming format is [name, calories, quantity]
+            String ingredientText = "• " + ingredient.get(0) +
+                    " (" + ingredient.get(2) + ")";
+            ingredientTextView.setText(ingredientText);
+
             ingredientTextView.setTextSize(16);
             ingredientsContainer.addView(ingredientTextView);
         }
