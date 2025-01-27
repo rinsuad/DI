@@ -82,6 +82,7 @@ public class DetailActivity extends AppCompatActivity {
             ingredientTextView.setText(ingredientText);
 
             ingredientTextView.setTextSize(16);
+            ingredientTextView.setTextAppearance(R.style.CustomEditText);
             ingredientsContainer.addView(ingredientTextView);
         }
 
@@ -91,6 +92,7 @@ public class DetailActivity extends AppCompatActivity {
             TextView stepTextView = new TextView(this);
             stepTextView.setText((i + 1) + ". " + recipe.getSteps().get(i)); // Numbered steps
             stepTextView.setTextSize(16);
+            stepTextView.setTextAppearance(R.style.CustomEditText);
             stepsContainer.addView(stepTextView);
         }
 
@@ -100,6 +102,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView caloriesTextView = new TextView(this);
         caloriesTextView.setText(String.valueOf(recipe.getCalories()) + " Calories");
         caloriesTextView.setTextSize(16);
+        caloriesTextView.setTextAppearance(R.style.CustomEditText);
         caloriesContainer.addView(caloriesTextView);
     }
 }

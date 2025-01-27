@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary">
+            app:contentScrim="@color/backgroundColor"
+            >
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"
@@ -43,35 +44,36 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
+                android:textColor="#BB86FC"
                 android:layout_marginBottom="8dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="#666666"
+                android:textColor="#B0B0B0"
                 android:layout_marginBottom="16dp"/>
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/firstDivider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ingredients"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
+                android:textColor="#BB86FC"
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
@@ -81,39 +83,42 @@
                 android:orientation="vertical"/>
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/secondDivider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Steps"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
+                android:textColor="#BB86FC"
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
                 android:id="@+id/stepsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical"
+                />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/thirdDivider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Calories:"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
+                android:textColor="#BB86FC"
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
