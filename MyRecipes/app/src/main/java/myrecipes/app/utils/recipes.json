@@ -6,7 +6,7 @@
       "description": "Avena del día anterior inspirada en el sabor Kinder Bueno, con un topping cremoso y delicioso.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Avena%20kinder%20bueno.jpg",
       "ingredients": [
-        "Avena", "170 calorías", "45 gramos",
+        ["Avena", "170 calorías", "45 gramos"],
         ["Polvo de proteína de chocolate blanco", 60, "15 gramos"],
         ["Semillas de chía", 20, "1 cucharadita"],
         ["Yogur ligero", 20, "30 gramos"],

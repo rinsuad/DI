@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Recipes</string>
+    <string name="recipe_image_description">Imagen de la receta</string>
 </resources>
