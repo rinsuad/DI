@@ -2,44 +2,34 @@ package myrecipes.app.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import myrecipes.app.R;
 import myrecipes.app.adapters.RecipeAdapter;
-import myrecipes.app.databinding.ActivityDashboardBinding;
+import myrecipes.app.databinding.ActivityFavouriteBinding;
 import myrecipes.app.models.Recipe;
-import myrecipes.app.viewmodels.DashboardViewModel;
+import myrecipes.app.viewmodels.FavouriteViewModel;
 
-public class DashboardActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
-    private DashboardViewModel viewModel;
-    private ActivityDashboardBinding binding;
+public class FavouriteActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
+    private FavouriteViewModel viewModel;  // Fix type error
+    private ActivityFavouriteBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_favourite);
 
         // ViewModel setup
-        viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        viewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
         // RecyclerView setup
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Logout button setup
-        binding.logoutButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        });
-
-        // Favourite button setup
-        binding.favouritesButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FavouriteActivity.class);
-            startActivity(intent);
-        });
 
         // Observe recipe data
         viewModel.getRecipeLiveData().observe(this, recipes -> {

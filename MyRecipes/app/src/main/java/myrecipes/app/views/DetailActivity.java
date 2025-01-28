@@ -23,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
 
         setupToolbar();
         setupViewModel();
+        setupFavouriteFab();
     }
 
     private void setupToolbar() {
@@ -31,6 +32,22 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+    }
+
+    private void setupFavouriteFab() {
+        binding.fabFavourite.setOnClickListener(v -> {
+            Recipe currentRecipe = viewModel.getRecipe().getValue();
+            if (currentRecipe != null) {
+                viewModel.toggleFavourite(currentRecipe);
+            }
+        });
+
+        // Observe favourite status and update FAB icon
+        //viewModel.isFavourite().observe(this, isFavourite -> {
+         //   binding.fabFavourite.setImageResource(
+           //         isFavourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border
+            //);
+        //});
     }
 
     private void setupViewModel() {

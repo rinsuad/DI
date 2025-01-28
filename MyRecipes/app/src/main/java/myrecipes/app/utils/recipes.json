@@ -6,14 +6,46 @@
       "description": "Avena del día anterior inspirada en el sabor Kinder Bueno, con un topping cremoso y delicioso.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Avena%20kinder%20bueno.jpg",
       "ingredients": [
-        ["Avena", "170 calorías", "45 gramos"],
-        ["Polvo de proteína de chocolate blanco", 60, "15 gramos"],
-        ["Semillas de chía", 20, "1 cucharadita"],
-        ["Yogur ligero", 20, "30 gramos"],
-        ["Leche", 40, "100 ml"],
-        ["Yogur", 50, "70 gramos"],
-        ["Polvo de proteína de chocolate blanco", 40, "10 gramos"],
-        ["Nutella / Crema de avellanas", 55, "10 gramos"]
+        [
+          "Avena",
+          "170 calorías",
+          "45 gramos"
+        ],
+        [
+          "Polvo de proteína de chocolate blanco",
+          60,
+          "15 gramos"
+        ],
+        [
+          "Semillas de chía",
+          20,
+          "1 cucharadita"
+        ],
+        [
+          "Yogur ligero",
+          20,
+          "30 gramos"
+        ],
+        [
+          "Leche",
+          40,
+          "100 ml"
+        ],
+        [
+          "Yogur",
+          50,
+          "70 gramos"
+        ],
+        [
+          "Polvo de proteína de chocolate blanco",
+          40,
+          "10 gramos"
+        ],
+        [
+          "Nutella / Crema de avellanas",
+          55,
+          "10 gramos"
+        ]
       ],
       "steps": [
         "Mezclar todos los ingredientes base en un bol.",
@@ -32,12 +64,36 @@
       "description": "Bizcocho fácil y nutritivo de avena y plátano, perfecto para un desayuno o merienda saludable.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Bizcocho%20avena%20y%20platano.jpg",
       "ingredients": [
-        ["Avena", 154, "1 taza"],
-        ["Leche", 61, "1/2 taza"],
-        ["Plátano muy maduro", 105, "1"],
-        ["Canela", 3, "1/2 cucharadita"],
-        ["Levadura", 2, "1 cucharadita"],
-        ["Chips de chocolate", 200, "1/4 taza"]
+        [
+          "Avena",
+          154,
+          "1 taza"
+        ],
+        [
+          "Leche",
+          61,
+          "1/2 taza"
+        ],
+        [
+          "Plátano muy maduro",
+          105,
+          "1"
+        ],
+        [
+          "Canela",
+          3,
+          "1/2 cucharadita"
+        ],
+        [
+          "Levadura",
+          2,
+          "1 cucharadita"
+        ],
+        [
+          "Chips de chocolate",
+          200,
+          "1/4 taza"
+        ]
       ],
       "steps": [
         "Machacar el plátano hasta que no queden grumos.",
@@ -53,13 +109,41 @@
       "description": "Bizcocho de chocolate fit, rico en proteínas y fácil de preparar, ideal para satisfacer antojos de dulce de manera más saludable.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Bizcocho%20chocofit.jpg",
       "ingredients": [
-        ["Huevos", 210, "3"],
-        ["Plátanos", 315, "3"],
-        ["Crema de cacahuete", 750, "1/2 taza"],
-        ["Cacao desgrasado", 50, "1/2 taza"],
-        ["Harina", 110, "1/4 taza"],
-        ["Chispas de chocolate", 200, "1/4 taza"],
-        ["Levadura", 5, "Cantidad al gusto"]
+        [
+          "Huevos",
+          210,
+          "3"
+        ],
+        [
+          "Plátanos",
+          315,
+          "3"
+        ],
+        [
+          "Crema de cacahuete",
+          750,
+          "1/2 taza"
+        ],
+        [
+          "Cacao desgrasado",
+          50,
+          "1/2 taza"
+        ],
+        [
+          "Harina",
+          110,
+          "1/4 taza"
+        ],
+        [
+          "Chispas de chocolate",
+          200,
+          "1/4 taza"
+        ],
+        [
+          "Levadura",
+          5,
+          "Cantidad al gusto"
+        ]
       ],
       "steps": [
         "Batir los huevos y machacar los plátanos junto con la crema de cacahuete.",
@@ -76,12 +160,36 @@
       "description": "Bizcocho ligero de chocolate y yogur, perfecto para un postre dulce y bajo en calorías.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Bizcocho%20chocolate%20y%20yogur.jpg",
       "ingredients": [
-        ["Huevo", 70, "1"],
-        ["Azúcar", 100, "25 gramos"],
-        ["Yogurt griego", 59, "50 gramos"],
-        ["Harina/maicena", 91, "25 gramos"],
-        ["Cacao en polvo", 34, "15 gramos"],
-        ["Levadura", 5, "1 cucharadita"]
+        [
+          "Huevo",
+          70,
+          "1"
+        ],
+        [
+          "Azúcar",
+          100,
+          "25 gramos"
+        ],
+        [
+          "Yogurt griego",
+          59,
+          "50 gramos"
+        ],
+        [
+          "Harina/maicena",
+          91,
+          "25 gramos"
+        ],
+        [
+          "Cacao en polvo",
+          34,
+          "15 gramos"
+        ],
+        [
+          "Levadura",
+          5,
+          "1 cucharadita"
+        ]
       ],
       "steps": [
         "Mezclar el yogur, el cacao y el azúcar para la cobertura y guardarlo en la nevera.",
@@ -92,9 +200,21 @@
       ],
       "title": "Bizcocho Chocolate y Yogurt",
       "topping": [
-        ["Yogurt griego", 59, "50 gramos"],
-        ["Cacao en polvo", 8, "1 cucharadita"],
-        ["Azúcar", 32, "2 cucharaditas"]
+        [
+          "Yogurt griego",
+          59,
+          "50 gramos"
+        ],
+        [
+          "Cacao en polvo",
+          8,
+          "1 cucharadita"
+        ],
+        [
+          "Azúcar",
+          32,
+          "2 cucharaditas"
+        ]
       ]
     },
     "bocaditos_de_fruta": {
@@ -103,10 +223,26 @@
       "description": "Deliciosos bocaditos de fruta congelada con yogur, cacao y pepitas de chocolate, perfectos para un snack bajo en calorías.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Bocaditos%20de%20fruta.jpeg",
       "ingredients": [
-        ["Plátano", 105, "1 mediano"],
-        ["Yogurt", 35, "4 cucharadas (aproximadamente 60g)"],
-        ["Cacao en polvo", 12, "1 cucharada"],
-        ["Pepitas de chocolate", 70, "1 cucharada (aproximadamente 15g)"]
+        [
+          "Plátano",
+          105,
+          "1 mediano"
+        ],
+        [
+          "Yogurt",
+          35,
+          "4 cucharadas (aproximadamente 60g)"
+        ],
+        [
+          "Cacao en polvo",
+          12,
+          "1 cucharada"
+        ],
+        [
+          "Pepitas de chocolate",
+          70,
+          "1 cucharada (aproximadamente 15g)"
+        ]
       ],
       "steps": [
         "Colocar rodajas o trocitos de plátano sobre papel de horno.",
@@ -122,16 +258,56 @@
       "description": "Brownie de chocolate hecho con harina de arroz glutinoso, ideal para un postre dulce y consistente.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Brownie%20de%20chocolate%20y%20harina%20de%20arroz.jpg",
       "ingredients": [
-        ["Margarina", 300, "40g"],
-        ["Huevo", 70, "1"],
-        ["Leche", 90, "180mL"],
-        ["Edulcorante", 0, "80g"],
-        ["Chocolate negro", 300, "60g"],
-        ["Harina de arroz glutinoso", 360, "100g"],
-        ["Cacao en polvo", 20, "10g"],
-        ["Proteína de chocolate", 140, "35g"],
-        ["Café", 0, "Al gusto"],
-        ["Sal", 0, "Una pizca"]
+        [
+          "Margarina",
+          300,
+          "40g"
+        ],
+        [
+          "Huevo",
+          70,
+          "1"
+        ],
+        [
+          "Leche",
+          90,
+          "180mL"
+        ],
+        [
+          "Edulcorante",
+          0,
+          "80g"
+        ],
+        [
+          "Chocolate negro",
+          300,
+          "60g"
+        ],
+        [
+          "Harina de arroz glutinoso",
+          360,
+          "100g"
+        ],
+        [
+          "Cacao en polvo",
+          20,
+          "10g"
+        ],
+        [
+          "Proteína de chocolate",
+          140,
+          "35g"
+        ],
+        [
+          "Café",
+          0,
+          "Al gusto"
+        ],
+        [
+          "Sal",
+          0,
+          "Una pizca"
+        ]
       ],
       "steps": [
         "Derrite el chocolate con la margarina.",
@@ -149,12 +325,36 @@
       "description": "Un desayuno dulce y saludable de avena horneada con trozos de chocolate.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Chocolate%20chip%20baked%20oats.jpg",
       "ingredients": [
-        ["Harina de avena", 150, "40g"],
-        ["Proteína de vainilla", 100, "25g"],
-        ["Yogur griego light", 30, "50g"],
-        ["Levadura", 10, "1.5 cucharadas"],
-        ["Cacao en polvo", 25, "10g"],
-        ["Trozos de chocolate", 100, "20g"]
+        [
+          "Harina de avena",
+          150,
+          "40g"
+        ],
+        [
+          "Proteína de vainilla",
+          100,
+          "25g"
+        ],
+        [
+          "Yogur griego light",
+          30,
+          "50g"
+        ],
+        [
+          "Levadura",
+          10,
+          "1.5 cucharadas"
+        ],
+        [
+          "Cacao en polvo",
+          25,
+          "10g"
+        ],
+        [
+          "Trozos de chocolate",
+          100,
+          "20g"
+        ]
       ],
       "steps": [
         "Mezclar todos los ingredientes salvo el cacao.",
@@ -171,12 +371,36 @@
       "description": "Un postre proteico inspirado en el Kit Kat, ideal para una cena ligera y dulce.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Kit%20Kat%20protein%20dessert.webp",
       "ingredients": [
-        ["Yogur griego light", 150, "250g"],
-        ["Proteína en polvo de vainilla", 60, "15g"],
-        ["Cacao en polvo", 25, "10g"],
-        ["Tortitas de arroz", 105, "3 unidades"],
-        ["Chocolate negro", 55, "10g"],
-        ["Edulcorante", 0, "Al gusto"]
+        [
+          "Yogur griego light",
+          150,
+          "250g"
+        ],
+        [
+          "Proteína en polvo de vainilla",
+          60,
+          "15g"
+        ],
+        [
+          "Cacao en polvo",
+          25,
+          "10g"
+        ],
+        [
+          "Tortitas de arroz",
+          105,
+          "3 unidades"
+        ],
+        [
+          "Chocolate negro",
+          55,
+          "10g"
+        ],
+        [
+          "Edulcorante",
+          0,
+          "Al gusto"
+        ]
       ],
       "steps": [
         "Mezclar el yogur con la proteína en polvo y el edulcorante.",
@@ -195,13 +419,41 @@
       "description": "Muffins de plátano con chocolate negro, ideales para un desayuno o snack energético y delicioso.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Muffins%20platano.jpg",
       "ingredients": [
-        ["Plátanos pequeños o grandes", 270, "3 pequeños o 2 grandes"],
-        ["Harina (blanca o integral)", 480, "140g"],
-        ["Aceite de oliva virgen extra", 360, "40g"],
-        ["Chocolate negro", 320, "60g"],
-        ["Levadura", 5, "1 cucharadita"],
-        ["Huevos", 140, "2"],
-        ["Sal", 0, "Una pizca"]
+        [
+          "Plátanos pequeños o grandes",
+          270,
+          "3 pequeños o 2 grandes"
+        ],
+        [
+          "Harina (blanca o integral)",
+          480,
+          "140g"
+        ],
+        [
+          "Aceite de oliva virgen extra",
+          360,
+          "40g"
+        ],
+        [
+          "Chocolate negro",
+          320,
+          "60g"
+        ],
+        [
+          "Levadura",
+          5,
+          "1 cucharadita"
+        ],
+        [
+          "Huevos",
+          140,
+          "2"
+        ],
+        [
+          "Sal",
+          0,
+          "Una pizca"
+        ]
       ],
       "steps": [
         "Aplasta los plátanos, cuanto más maduros, mejor.",
@@ -218,14 +470,46 @@
       "description": "Un mug brownie delicioso y rápido, perfecto para una merienda o postre con alto contenido proteico.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Mug%20brownie.jpg",
       "ingredients": [
-        ["Proteína en polvo", 140, "1/4 taza (32-34g)"],
-        ["Harina", 60, "1 cucharada"],
-        ["Edulcorante granulado", 10, "2 cucharadas"],
-        ["Levadura en polvo", 3, "1/2 cucharadita"],
-        ["Cacao en polvo", 28, "1 y 1/2 cucharadas (12g)"],
-        ["Huevo grande", 72, "1"],
-        ["Leche", 25, "1/4 taza (60ml)"],
-        ["Chips de chocolate", 75, "1 cucharada (opcional, 15g)"]
+        [
+          "Proteína en polvo",
+          140,
+          "1/4 taza (32-34g)"
+        ],
+        [
+          "Harina",
+          60,
+          "1 cucharada"
+        ],
+        [
+          "Edulcorante granulado",
+          10,
+          "2 cucharadas"
+        ],
+        [
+          "Levadura en polvo",
+          3,
+          "1/2 cucharadita"
+        ],
+        [
+          "Cacao en polvo",
+          28,
+          "1 y 1/2 cucharadas (12g)"
+        ],
+        [
+          "Huevo grande",
+          72,
+          "1"
+        ],
+        [
+          "Leche",
+          25,
+          "1/4 taza (60ml)"
+        ],
+        [
+          "Chips de chocolate",
+          75,
+          "1 cucharada (opcional, 15g)"
+        ]
       ],
       "steps": [
         "Mezcla todos los ingredientes en una taza.",
@@ -239,12 +523,36 @@
       "description": "Una versión casera de Nutella, rica en proteínas y hecha con garbanzos y avellanas tostadas.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Nutella.jpeg",
       "ingredients": [
-        ["Garbanzos", 270, "1 bote"],
-        ["Cacao en polvo", 60, "3 cucharadas"],
-        ["Edulcorante", 0, "1 cucharada"],
-        ["Avellanas tostadas", 628, "100g"],
-        ["Agua hirviendo", 0, "350ml"],
-        ["Polvo de proteína", 100, "1 scoop"]
+        [
+          "Garbanzos",
+          270,
+          "1 bote"
+        ],
+        [
+          "Cacao en polvo",
+          60,
+          "3 cucharadas"
+        ],
+        [
+          "Edulcorante",
+          0,
+          "1 cucharada"
+        ],
+        [
+          "Avellanas tostadas",
+          628,
+          "100g"
+        ],
+        [
+          "Agua hirviendo",
+          0,
+          "350ml"
+        ],
+        [
+          "Polvo de proteína",
+          100,
+          "1 scoop"
+        ]
       ],
       "steps": [
         "Precalienta el horno a 200 grados Celsius y hornea los garbanzos durante 15 minutos.",
@@ -260,14 +568,46 @@
       "description": "Deliciosa cheesecake de oreo, con una base crujiente y una capa cremosa de queso.",
       "imageUrl": "https://raw.githubusercontent.com/rinsuad/DI/refs/heads/Semana1/MyRecipes/recipe_images/Oreo%20Cheesecake.png",
       "ingredients": [
-        ["Galletas Oreo", 780, "15 unidades"],
-        ["Queso crema bajo en grasa", 400, "500g"],
-        ["Proteína de chocolate", 100, "25g"],
-        ["Margarina", 180, "25g"],
-        ["Leche", 42, "100ml"],
-        ["Huevos", 144, "2"],
-        ["Yogur griego 0%", 89, "150g"],
-        ["Harina de avena", 350, "90g"]
+        [
+          "Galletas Oreo",
+          780,
+          "15 unidades"
+        ],
+        [
+          "Queso crema bajo en grasa",
+          400,
+          "500g"
+        ],
+        [
+          "Proteína de chocolate",
+          100,
+          "25g"
+        ],
+        [
+          "Margarina",
+          180,
+          "25g"
+        ],
+        [
+          "Leche",
+          42,
+          "100ml"
+        ],
+        [
+          "Huevos",
+          144,
+          "2"
+        ],
+        [
+          "Yogur griego 0%",
+          89,
+          "150g"
+        ],
+        [
+          "Harina de avena",
+          350,
+          "90g"
+        ]
       ],
       "steps": [
         "Toma 10 galletas Oreo y separa la parte negra de la blanca.",
@@ -292,6 +632,17 @@
       "email": "r@r.com",
       "fullName": "R",
       "phone": "123456789"
+    }
+  },
+  "userFavorites": {
+    "bWtwd9jd7vQstmH0h1opgT8yFdw1": {
+      "avena_kinder_bueno": true,
+      "bizcocho_avena_y_platano": true
+    },
+    "t1ACsZUrVUSfxXCBvrAy65Jz9M33": {
+      "mug_brownie": true,
+      "nutella": true,
+      "oreo_cheesecake": true
     }
   }
 }

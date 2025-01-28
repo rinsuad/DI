@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="myrecipes.app.viewmodels.DetailViewModel" />
@@ -26,13 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/ExpandedTitle"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.recipe.title}"
                 app:expandedTitleTextAppearance="@style/CollapsedTitle"
-                app:collapsedTitleTextAppearance="@style/ExpandedTitle">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{viewModel.recipe.title}">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
@@ -134,6 +135,15 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:contentDescription="Add to favorites"
+            app:srcCompat="@drawable/ic_favourite_border" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

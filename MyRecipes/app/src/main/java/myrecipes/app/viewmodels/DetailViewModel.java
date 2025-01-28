@@ -9,6 +9,7 @@ import myrecipes.app.repositories.DashboardRepository;
 public class DetailViewModel extends ViewModel {
     private final DashboardRepository repository;
     private final MutableLiveData<Recipe> recipe = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isFavourite = new MutableLiveData<>();
     private final MutableLiveData<String> error = new MutableLiveData<>();
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
@@ -30,5 +31,17 @@ public class DetailViewModel extends ViewModel {
         });
 
         repository.getSingleRecipe(recipeId, tempRecipeLiveData);
+    }
+
+    public LiveData<Boolean> isFavourite() {
+        return isFavourite;
+    }
+
+    public void toggleFavourite(Recipe recipe) {
+        Boolean currentFavouriteStatus = isFavourite.getValue();
+        if (currentFavouriteStatus != null) {
+            repository.toggleFavourite(recipe.getId(), !currentFavouriteStatus);
+            isFavourite.setValue(!currentFavouriteStatus);
+        }
     }
 }

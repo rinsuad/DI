@@ -13,9 +13,11 @@ import myrecipes.app.models.Recipe;
 
 public class DashboardRepository {
     private final DatabaseReference recipeRef;
+    private final DatabaseReference favouriteRef;
 
     public DashboardRepository() {
         recipeRef = FirebaseDatabase.getInstance().getReference("recipes");
+        favouriteRef = FirebaseDatabase.getInstance().getReference("favourites");
     }
 
     public void getRecipe(MutableLiveData<List<Recipe>> recipeLiveData) {
@@ -58,5 +60,29 @@ public class DashboardRepository {
                 // Error handling
             }
         });
+    }
+
+    public void toggleFavourite(String recipeId, boolean isFavourite) {
+        if (isFavourite) {
+            // Get the recipe and add to favourites
+            recipeRef.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Recipe recipe = snapshot.getValue(Recipe.class);
+                    if (recipe != null) {
+                        recipe.setId(snapshot.getKey());
+                        favouriteRef.child(recipeId).setValue(recipe);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle error
+                }
+            });
+        } else {
+            // Remove from favourites
+            favouriteRef.child(recipeId).removeValue();
+        }
     }
 }
