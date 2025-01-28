@@ -15,7 +15,7 @@ import myrecipes.app.models.Recipe;
 import myrecipes.app.viewmodels.FavouriteViewModel;
 
 public class FavouriteActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
-    private FavouriteViewModel viewModel;  // Fix type error
+    private FavouriteViewModel viewModel;
     private ActivityFavouriteBinding binding;
 
     @Override

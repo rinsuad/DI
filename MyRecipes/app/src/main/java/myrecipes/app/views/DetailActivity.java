@@ -43,11 +43,11 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         // Observe favourite status and update FAB icon
-        //viewModel.isFavourite().observe(this, isFavourite -> {
-         //   binding.fabFavourite.setImageResource(
-           //         isFavourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border
-            //);
-        //});
+        viewModel.isFavourite().observe(this, isFavourite -> {
+            binding.fabFavourite.setImageResource(
+                    isFavourite ? R.drawable.ic_favourite : R.drawable.ic_favourite_border
+            );
+        });
     }
 
     private void setupViewModel() {
