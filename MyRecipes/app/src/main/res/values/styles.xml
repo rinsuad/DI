@@ -24,4 +24,13 @@
         <item name="contentPadding">16dp</item>
     </style>
 
+    <style name="ExpandedTitle">
+        <item name="android:textColor">@android:color/transparent</item> <!-- Make the expanded title transparent -->
+    </style>
+
+    <style name="CollapsedTitle">
+        <item name="android:textColor">#FFFFFF</item> <!-- Color for the collapsed title -->
+    </style>
+
+
 </resources>
