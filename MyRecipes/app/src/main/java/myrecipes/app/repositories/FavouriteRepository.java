@@ -71,7 +71,13 @@ public class FavouriteRepository {
 
     public void toggleFavorite(String recipeId, boolean isFavorite) {
         String userId = auth.getCurrentUser().getUid();
-        favouriteRef.child(userId).child(recipeId).setValue(isFavorite);
+        if (isFavorite) {
+            // Add to favorites
+            favouriteRef.child(userId).child(recipeId).setValue(true);
+        } else {
+            // Remove from favorites
+            favouriteRef.child(userId).child(recipeId).removeValue();
+        }
     }
 
     public void checkIsFavorite(String recipeId, MutableLiveData<Boolean> isFavoriteLiveData) {
@@ -80,8 +86,8 @@ public class FavouriteRepository {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Boolean isFavorite = snapshot.getValue(Boolean.class);
-                        isFavoriteLiveData.setValue(isFavorite != null && isFavorite);
+                        // Will be null if the recipe is not in favorites
+                        isFavoriteLiveData.setValue(snapshot.exists());
                     }
 
                     @Override
