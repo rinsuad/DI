@@ -1,5 +1,7 @@
 package myrecipes.app.repositories;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +29,14 @@ public class DashboardRepository {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Recipe> recipes = new ArrayList<>();
                 for (DataSnapshot recipeSnapshot : snapshot.getChildren()) {
-                    Recipe recipe = recipeSnapshot.getValue(Recipe.class);
-                    if (recipe != null) {
-                        recipe.setId(recipeSnapshot.getKey());
-                        recipes.add(recipe);
+                    try {
+                        Recipe recipe = recipeSnapshot.getValue(Recipe.class);
+                        if (recipe != null) {
+                            recipe.setId(recipeSnapshot.getKey());
+                            recipes.add(recipe);
+                        }
+                    } catch (Exception e) {
+                        Log.e("DashboardRepository", "Error parsing recipe: " + e.getMessage());
                     }
                 }
                 recipeLiveData.setValue(recipes);
@@ -38,7 +44,8 @@ public class DashboardRepository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+                Log.e("DashboardRepository", "Error loading recipes: " + error.getMessage());
+                recipeLiveData.postValue(new ArrayList<>());
             }
         });
     }
