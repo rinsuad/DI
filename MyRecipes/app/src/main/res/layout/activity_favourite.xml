@@ -18,7 +18,9 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
@@ -26,16 +28,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                app:title="My Favourite Recipes"
+                app:titleCentered="true"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                <TextView
-                    android:layout_width="wrap_content"
+
+            <TextView
+                    android:id="@+id/customTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Favorite Recipes"
-                    android:textColor="@color/md_theme_primary"
+                    android:text="My Favourite Recipes"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
-
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_gravity="center" />
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
