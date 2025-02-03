@@ -25,6 +25,7 @@
         <activity android:name=".views.RegisterActivity" android:theme="@style/AppTheme" android:exported="true"/>
         <activity android:name=".views.DashboardActivity" android:theme="@style/AppTheme" android:exported="true"/>
         <activity android:name=".views.DetailActivity" android:theme="@style/AppTheme" android:exported="true"/>
+        <activity android:name=".views.FavouriteActivity" android:theme="@style/AppTheme" android:exported="true"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package myrecipes.app.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -23,6 +24,12 @@ public class DetailActivity extends AppCompatActivity {
 
         setupToolbar();
         setupViewModel();
+        setupFavouriteFab();
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
     }
 
     private void setupToolbar() {
@@ -31,6 +38,22 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+    }
+
+    private void setupFavouriteFab() {
+        binding.fabFavourite.setOnClickListener(v -> {
+            Recipe currentRecipe = viewModel.getRecipe().getValue();
+            if (currentRecipe != null) {
+                viewModel.toggleFavourite(currentRecipe);
+            }
+        });
+
+        // Observe favourite status and update FAB icon
+        viewModel.isFavourite().observe(this, isFavourite -> {
+            binding.fabFavourite.setImageResource(
+                    isFavourite ? R.drawable.ic_favourite : R.drawable.ic_favourite_border
+            );
+        });
     }
 
     private void setupViewModel() {
@@ -46,13 +69,15 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void displayRecipeDetails(Recipe recipe) {
+        Log.d("DetailActivity", "displayRecipeDetails: " + recipe.getTitle() + recipe.getCalories());
+
         // Update dynamic containers that can't be directly bound
         binding.ingredientsContainer.removeAllViews();
         for (List<Object> ingredient : recipe.getIngredients()) {
             TextView ingredientTextView = new TextView(this);
             String ingredientText = "• " + ingredient.get(0) + " (" + ingredient.get(2) + ")";
             ingredientTextView.setText(ingredientText);
-            ingredientTextView.setTextSize(16);
+            ingredientTextView.setTextSize(18);
             ingredientTextView.setTextAppearance(R.style.CustomEditText);
             binding.ingredientsContainer.addView(ingredientTextView);
         }
@@ -61,15 +86,16 @@ public class DetailActivity extends AppCompatActivity {
         for (int i = 0; i < recipe.getSteps().size(); i++) {
             TextView stepTextView = new TextView(this);
             stepTextView.setText((i + 1) + ". " + recipe.getSteps().get(i));
-            stepTextView.setTextSize(16);
+            stepTextView.setTextSize(18);
             stepTextView.setTextAppearance(R.style.CustomEditText);
             binding.stepsContainer.addView(stepTextView);
         }
 
         binding.caloriesContainer.removeAllViews();
         TextView caloriesTextView = new TextView(this);
-        caloriesTextView.setText(String.valueOf(recipe.getCalories()) + " Calories");
-        caloriesTextView.setTextSize(16);
+        int calories = recipe.getCalories();
+        caloriesTextView.setText(calories + " Calories");
+        caloriesTextView.setTextSize(18);
         caloriesTextView.setTextAppearance(R.style.CustomEditText);
         binding.caloriesContainer.addView(caloriesTextView);
     }

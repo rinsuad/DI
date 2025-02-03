@@ -1,5 +1,7 @@
 package myrecipes.app.models;
 
+import com.google.firebase.database.PropertyName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,7 +12,6 @@ public class Recipe {
     private String title;
     private String description;
     private String imageUrl;
-    private int calories;
     public List<List<Object>> ingredients;
     private List<String> steps;
 
@@ -49,8 +50,14 @@ public class Recipe {
         return imageUrl;
     }
 
+    @PropertyName("calorias_totales")
+    private int calories;
+
+    @PropertyName("calorias_totales_por_porcion")
+    private int caloriesPerPortion;
+
     public int getCalories() {
-        return calories;
+        return calories != 0 ? calories : caloriesPerPortion;
     }
 
     public List<String> getIngredientsList() {

@@ -10,18 +10,24 @@ import java.util.List;
 
 public class DashboardViewModel extends ViewModel {
     private final MutableLiveData<List<Recipe>> recipeLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final DashboardRepository dashboardRepository;
 
     public DashboardViewModel() {
         dashboardRepository = new DashboardRepository();
-        loadProducts();
+        loadRecipes();
     }
 
     public LiveData<List<Recipe>> getRecipeLiveData() {
         return recipeLiveData;
     }
 
-    private void loadProducts() {
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
+    private void loadRecipes() {
+        isLoading.setValue(true);
         dashboardRepository.getRecipe(recipeLiveData);
     }
 }

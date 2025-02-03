@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="myrecipes.app.viewmodels.DetailViewModel" />
@@ -12,7 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardBackground"
+        android:background="?attr/colorSurface"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -26,11 +27,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/CollapsedTitle"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.recipe.title}">
+                app:expandedTitleTextAppearance="@style/ExpandedTitle"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
@@ -45,9 +47,11 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="76dp"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                    app:title="@{viewModel.recipe.title}"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:navigationIcon="@drawable/ic_arrow_back"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -69,8 +73,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@{viewModel.recipe.title}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                    android:textColor="@color/primaryColor"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="22sp"
                     tools:text="" />
 
                 <TextView
@@ -78,8 +83,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:text="@{viewModel.recipe.description}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textSize="18sp"
                     tools:text="" />
 
                 <TextView
@@ -88,7 +95,8 @@
                     android:layout_marginBottom="8dp"
                     android:text="INGREDIENTES"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/primaryColor"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -104,7 +112,8 @@
                     android:layout_marginBottom="8dp"
                     android:text="STEPS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/primaryColor"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -120,7 +129,8 @@
                     android:layout_marginBottom="8dp"
                     android:text="CALORIAS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/primaryColor"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -132,6 +142,15 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:contentDescription="Toggle favorite"
+            tools:src="@drawable/ic_favourite_border" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
