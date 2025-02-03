@@ -1,6 +1,16 @@
 <resources>
-    <color name="md_theme_primary">#FFB5A0</color>
-    <color name="md_theme_onPrimary">#561F0F</color>
+    <!-- Colores para AppBar en modo oscuro -->
+    <color name="md_theme_primary">#723523</color>  <!-- Color más oscuro -->
+    <color name="md_theme_onPrimary">#FFFFFF</color>  <!-- Texto blanco para contraste -->
+
+    <!-- Colores para el fondo en modo oscuro -->
+    <color name="md_theme_surfaceContainerHighest">#3D322F</color>
+    <color name="md_theme_surfaceContainerHigh">#322825</color>
+
+    <!-- Colores para texto en modo oscuro -->
+    <color name="md_theme_onSurface">#F1DFDA</color>  <!-- Texto claro -->
+    <color name="md_theme_onSurfaceVariant">#D8C2BC</color>  <!-- Texto secundario -->
+
     <color name="md_theme_primaryContainer">#723523</color>
     <color name="md_theme_onPrimaryContainer">#FFDBD1</color>
     <color name="md_theme_secondary">#E7BDB2</color>
@@ -18,9 +28,7 @@
     <color name="md_theme_background">#1A110F</color>
     <color name="md_theme_onBackground">#F1DFDA</color>
     <color name="md_theme_surface">#1A110F</color>
-    <color name="md_theme_onSurface">#F1DFDA</color>
     <color name="md_theme_surfaceVariant">#53433F</color>
-    <color name="md_theme_onSurfaceVariant">#D8C2BC</color>
     <color name="md_theme_outline">#A08C87</color>
     <color name="md_theme_outlineVariant">#53433F</color>
     <color name="md_theme_scrim">#000000</color>
@@ -44,8 +52,6 @@
     <color name="md_theme_surfaceContainerLowest">#140C0A</color>
     <color name="md_theme_surfaceContainerLow">#231917</color>
     <color name="md_theme_surfaceContainer">#271D1B</color>
-    <color name="md_theme_surfaceContainerHigh">#322825</color>
-    <color name="md_theme_surfaceContainerHighest">#3D322F</color>
     <color name="md_theme_primary_mediumContrast">#FFD2C6</color>
     <color name="md_theme_onPrimary_mediumContrast">#481506</color>
     <color name="md_theme_primaryContainer_mediumContrast">#CB7C65</color>

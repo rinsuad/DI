@@ -13,7 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_light_background"
+        android:background="?attr/colorSurface"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -73,7 +73,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="@{viewModel.recipe.title}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                    android:textColor="@color/md_theme_primary"
+                    android:textColor="?attr/colorOnSurface"
                     tools:text="" />
 
                 <TextView
@@ -81,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:text="@{viewModel.recipe.description}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     tools:text="" />
@@ -91,7 +92,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="INGREDIENTES"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/md_theme_primary"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -107,7 +108,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="STEPS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/md_theme_primary"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -123,7 +124,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="CALORIAS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/md_theme_primary"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <LinearLayout

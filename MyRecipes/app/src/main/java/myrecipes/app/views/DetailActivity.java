@@ -24,6 +24,7 @@ public class DetailActivity extends AppCompatActivity {
         setupToolbar();
         setupViewModel();
         setupFavouriteFab();
+
     }
 
     private void setupToolbar() {

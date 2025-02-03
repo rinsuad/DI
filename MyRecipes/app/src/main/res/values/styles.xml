@@ -18,18 +18,19 @@
     </style>
 
     <style name="CustomCard" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/md_theme_surface</item>
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainerHigh</item>
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">4dp</item>
         <item name="contentPadding">16dp</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="ExpandedTitle">
-        <item name="android:textColor">@android:color/transparent</item> <!-- Make the expanded title transparent -->
+        <item name="android:textColor">@android:color/transparent</item>
     </style>
 
     <style name="CollapsedTitle">
-        <item name="android:textColor">#FFFFFF</item> <!-- Color for the collapsed title -->
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 
