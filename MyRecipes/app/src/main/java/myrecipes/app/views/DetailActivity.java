@@ -70,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
             TextView ingredientTextView = new TextView(this);
             String ingredientText = "• " + ingredient.get(0) + " (" + ingredient.get(2) + ")";
             ingredientTextView.setText(ingredientText);
-            ingredientTextView.setTextSize(16);
+            ingredientTextView.setTextSize(20);
             ingredientTextView.setTextAppearance(R.style.CustomEditText);
             binding.ingredientsContainer.addView(ingredientTextView);
         }
@@ -79,15 +79,15 @@ public class DetailActivity extends AppCompatActivity {
         for (int i = 0; i < recipe.getSteps().size(); i++) {
             TextView stepTextView = new TextView(this);
             stepTextView.setText((i + 1) + ". " + recipe.getSteps().get(i));
-            stepTextView.setTextSize(16);
+            stepTextView.setTextSize(20);
             stepTextView.setTextAppearance(R.style.CustomEditText);
             binding.stepsContainer.addView(stepTextView);
         }
 
         binding.caloriesContainer.removeAllViews();
         TextView caloriesTextView = new TextView(this);
-        caloriesTextView.setText(String.valueOf(recipe.getCalories()) + " Calories");
-        caloriesTextView.setTextSize(16);
+        caloriesTextView.setText(recipe.getCalories() + " Calories");
+        caloriesTextView.setTextSize(20);
         caloriesTextView.setTextAppearance(R.style.CustomEditText);
         binding.caloriesContainer.addView(caloriesTextView);
     }

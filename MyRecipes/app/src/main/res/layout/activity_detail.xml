@@ -93,7 +93,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="INGREDIENTES"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="STEPS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="CALORIAS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
