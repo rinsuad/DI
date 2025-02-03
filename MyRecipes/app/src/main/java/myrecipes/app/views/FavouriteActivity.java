@@ -40,6 +40,10 @@ public class FavouriteActivity extends AppCompatActivity implements RecipeAdapte
                 ((RecipeAdapter) binding.recyclerView.getAdapter()).updateRecipes(recipes);
             }
         });
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     @Override

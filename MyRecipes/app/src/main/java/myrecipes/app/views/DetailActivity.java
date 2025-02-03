@@ -25,6 +25,10 @@ public class DetailActivity extends AppCompatActivity {
         setupViewModel();
         setupFavouriteFab();
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
     }
 
     private void setupToolbar() {
