@@ -8,6 +8,11 @@
         <item name="boxBackgroundColor">@color/md_theme_surface</item>
     </style>
 
+    <style name="CustomHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/md_theme_surface</item>
+    </style>
+
     <!-- Button style -->
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/md_theme_onPrimary</item>
@@ -25,12 +30,13 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="ExpandedTitle">
+    <style name="ExpandedTitle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:textColor">@android:color/transparent</item>
     </style>
 
-    <style name="CollapsedTitle">
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="CollapsedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 

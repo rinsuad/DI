@@ -27,13 +27,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:collapsedTitleTextAppearance="@style/ExpandedTitle"
+                app:collapsedTitleTextAppearance="@style/CollapsedTitle"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:expandedTitleTextAppearance="@style/CollapsedTitle"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.recipe.title}">
+                app:expandedTitleTextAppearance="@style/ExpandedTitle"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
@@ -48,8 +47,9 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="76dp"
                     app:layout_collapseMode="pin"
+                    app:title="@{viewModel.recipe.title}"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:navigationIcon="@drawable/ic_arrow_back"/>
 
@@ -75,6 +75,7 @@
                     android:text="@{viewModel.recipe.title}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                     android:textColor="?attr/colorOnSurface"
+                    android:textSize="22sp"
                     tools:text="" />
 
                 <TextView
@@ -85,7 +86,7 @@
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:text="@{viewModel.recipe.description}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:textSize="20dp"
+                    android:textSize="18sp"
                     tools:text="" />
 
                 <TextView
@@ -95,7 +96,7 @@
                     android:text="INGREDIENTES"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -112,7 +113,7 @@
                     android:text="STEPS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -129,7 +130,7 @@
                     android:text="CALORIAS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
