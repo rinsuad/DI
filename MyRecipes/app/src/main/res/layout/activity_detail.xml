@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@{viewModel.recipe.title}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                     android:textColor="?attr/colorOnSurface"
                     tools:text="" />
 
@@ -84,6 +84,7 @@
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:text="@{viewModel.recipe.description}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textSize="20dp"
                     tools:text="" />
 
                 <TextView
@@ -93,6 +94,7 @@
                     android:text="INGREDIENTES"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorPrimary"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -109,6 +111,7 @@
                     android:text="STEPS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorPrimary"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -125,6 +128,7 @@
                     android:text="CALORIAS"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/colorPrimary"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
