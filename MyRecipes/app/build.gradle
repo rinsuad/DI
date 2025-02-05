@@ -64,4 +64,7 @@ dependencies {
     annotationProcessor libs.compiler.v4120
     implementation libs.cardview
 
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+
 }

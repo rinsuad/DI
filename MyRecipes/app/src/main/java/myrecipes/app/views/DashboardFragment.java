@@ -3,49 +3,70 @@ package myrecipes.app.views;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import myrecipes.app.R;
 import myrecipes.app.adapters.RecipeAdapter;
-import myrecipes.app.databinding.ActivityDashboardBinding;
+import myrecipes.app.databinding.FragmentDashboardBinding;
 import myrecipes.app.models.Recipe;
 import myrecipes.app.viewmodels.DashboardViewModel;
 
-public class DashboardActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
+import static android.content.Context.MODE_PRIVATE;
+
+public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecipeClickListener {
     private DashboardViewModel viewModel;
-    private ActivityDashboardBinding binding;
+    private FragmentDashboardBinding binding;
     private static final String PREFS_NAME = "settings";
     private static final String NIGHT_MODE_KEY = "night_mode";
     private boolean isNightMode;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
+        setHasOptionsMenu(true);  // Enable options menu in fragment
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Set up toolbar
         Toolbar toolbar = binding.toolbar;
-        setSupportActionBar(toolbar);
+        if (getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        }
 
         // ViewModel setup
         viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
 
         // RecyclerView setup
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         // Observe recipe data
-        viewModel.getRecipeLiveData().observe(this, recipes -> {
+        viewModel.getRecipeLiveData().observe(getViewLifecycleOwner(), recipes -> {
             if (binding.recyclerView.getAdapter() == null) {
                 RecipeAdapter adapter = new RecipeAdapter(recipes, this);
                 binding.recyclerView.setAdapter(adapter);
@@ -55,23 +76,22 @@ public class DashboardActivity extends AppCompatActivity implements RecipeAdapte
         });
 
         // Load saved night mode preference
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         isNightMode = prefs.getBoolean(NIGHT_MODE_KEY, false);
         AppCompatDelegate.setDefaultNightMode(isNightMode ?
                 AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-
     }
 
     @Override
     public void onRecipeClick(Recipe recipe) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(requireContext(), DetailFragment.class);
         intent.putExtra("RECIPE_ID", recipe.getId());
         startActivity(intent);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.dashboard_menu, menu);
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.dashboard_menu, menu);
 
         // Toggle visibility of the correct night mode icon
         MenuItem lightModeItem = menu.findItem(R.id.action_light_mode);
@@ -85,12 +105,12 @@ public class DashboardActivity extends AppCompatActivity implements RecipeAdapte
             lightModeItem.setVisible(false);
         }
 
-        return true;
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
         int itemId = item.getItemId();
@@ -99,24 +119,30 @@ public class DashboardActivity extends AppCompatActivity implements RecipeAdapte
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             editor.putBoolean(NIGHT_MODE_KEY, false);
             editor.apply();
-            recreate();
+            requireActivity().recreate();
             return true;
         } else if (itemId == R.id.action_night_mode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             editor.putBoolean(NIGHT_MODE_KEY, true);
             editor.apply();
-            recreate();
+            requireActivity().recreate();
             return true;
         } else if (itemId == R.id.action_favourites) {
-            Intent intent = new Intent(DashboardActivity.this, FavouriteActivity.class);
+            Intent intent = new Intent(requireContext(), FavouritesFragment.class);
             startActivity(intent);
             return true;
         } else if (itemId == R.id.action_logout) {
-            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+            Intent intent = new Intent(requireContext(), LoginActivity.class);
             startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
