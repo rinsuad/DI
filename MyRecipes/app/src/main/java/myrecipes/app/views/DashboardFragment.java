@@ -51,12 +51,6 @@ public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecip
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Set up toolbar
-        Toolbar toolbar = binding.toolbar;
-        if (getActivity() != null) {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        }
-
         // ViewModel setup
         viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         binding.setViewModel(viewModel);
@@ -87,57 +81,6 @@ public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecip
         Intent intent = new Intent(requireContext(), DetailFragment.class);
         intent.putExtra("RECIPE_ID", recipe.getId());
         startActivity(intent);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.dashboard_menu, menu);
-
-        // Toggle visibility of the correct night mode icon
-        MenuItem lightModeItem = menu.findItem(R.id.action_light_mode);
-        MenuItem nightModeItem = menu.findItem(R.id.action_night_mode);
-
-        if (isNightMode) {
-            nightModeItem.setVisible(false);
-            lightModeItem.setVisible(true);
-        } else {
-            nightModeItem.setVisible(true);
-            lightModeItem.setVisible(false);
-        }
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        SharedPreferences prefs = requireContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        int itemId = item.getItemId();
-
-        if (itemId == R.id.action_light_mode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            editor.putBoolean(NIGHT_MODE_KEY, false);
-            editor.apply();
-            requireActivity().recreate();
-            return true;
-        } else if (itemId == R.id.action_night_mode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            editor.putBoolean(NIGHT_MODE_KEY, true);
-            editor.apply();
-            requireActivity().recreate();
-            return true;
-        } else if (itemId == R.id.action_favourites) {
-            Intent intent = new Intent(requireContext(), FavouritesFragment.class);
-            startActivity(intent);
-            return true;
-        } else if (itemId == R.id.action_logout) {
-            Intent intent = new Intent(requireContext(), LoginActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

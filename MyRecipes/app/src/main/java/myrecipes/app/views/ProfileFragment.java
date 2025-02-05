@@ -1,5 +1,6 @@
 package myrecipes.app.views;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,6 +51,12 @@ public class ProfileFragment extends Fragment {
 
         // Listener para alternar modo oscuro/claro
         darkModeSwitch.setOnCheckedChangeListener((compoundButton, checked) -> toggleDarkMode(checked));
+
+        Button updateProfileButton = view.findViewById(R.id.updateProfileButton);
+        updateProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        });
 
         return view;
     }
