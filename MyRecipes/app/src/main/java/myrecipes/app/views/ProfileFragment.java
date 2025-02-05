@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +26,7 @@ import myrecipes.app.R;
 public class ProfileFragment extends Fragment {
 
     private EditText currentPasswordEditText, newPasswordEditText;
-    private Switch darkModeSwitch;
+    private SwitchMaterial darkModeSwitch;
 
     public ProfileFragment() { }
 
