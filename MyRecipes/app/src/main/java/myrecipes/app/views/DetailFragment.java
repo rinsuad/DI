@@ -100,7 +100,7 @@ public class DetailFragment extends Fragment {
         binding.caloriesContainer.removeAllViews();
         TextView caloriesTextView = new TextView(requireContext());
         int calories = recipe.getCalories();
-        caloriesTextView.setText(calories + " Calories");
+        caloriesTextView.setText(calories + " Calorias totales");
         caloriesTextView.setTextSize(18);
         caloriesTextView.setTextAppearance(R.style.CustomEditText);
         binding.caloriesContainer.addView(caloriesTextView);

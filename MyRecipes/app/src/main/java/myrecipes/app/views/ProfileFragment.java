@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.LiveData;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -40,14 +38,13 @@ import myrecipes.app.viewmodels.ProfileViewModel;
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
+    private static final String PREFS_NAME = "AppSettings";
+    private static final String DARK_MODE_KEY = "dark_mode_enabled";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-
-        viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
-
         return binding.getRoot();
     }
 
@@ -55,9 +52,12 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // ViewModel setup
+        viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+
         // Get initial dark mode state from SharedPreferences
-        SharedPreferences prefs = requireActivity().getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
-        boolean isDarkMode = prefs.getBoolean("darkMode", false);
+        SharedPreferences prefs = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        boolean isDarkMode = prefs.getBoolean(DARK_MODE_KEY, false);
         binding.darkModeSwitch.setChecked(isDarkMode);
 
         // Setup click listeners
@@ -72,7 +72,7 @@ public class ProfileFragment extends Fragment {
 
         // Validate current password
         if (TextUtils.isEmpty(currentPass)) {
-            binding.currentPasswordEditText.setError("Current password is required");
+            binding.currentPasswordEditText.setError("La contraseña actual es obligatoria");
             return;
         }
 
@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment {
             AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPass);
             user.reauthenticate(credential)
                     .addOnSuccessListener(aVoid -> updatePassword(user, newPass))
-                    .addOnFailureListener(e -> handleAuthError(e));
+                    .addOnFailureListener(this::handleAuthError);
         }
     }
 
@@ -98,19 +98,19 @@ public class ProfileFragment extends Fragment {
         user.updatePassword(newPassword)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(requireContext(),
-                            "Password updated successfully", Toast.LENGTH_SHORT).show();
+                            "Contraseña actualizada exitosamente", Toast.LENGTH_SHORT).show();
                     binding.currentPasswordEditText.setText("");
                     binding.newPasswordEditText.setText("");
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(requireContext(),
-                                "Error updating password: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                                "Error al actualizar la contraseña: " + e.getMessage(), Toast.LENGTH_LONG).show());
     }
 
     private void handleAuthError(Exception e) {
-        String errorMessage = "Authentication failed: ";
+        String errorMessage = "Falló la autenticación: ";
         if (e instanceof FirebaseAuthInvalidCredentialsException) {
-            errorMessage += "Current password is incorrect";
+            errorMessage += "La contraseña actual es incorrecta";
         } else {
             errorMessage += e.getMessage();
         }
@@ -122,7 +122,7 @@ public class ProfileFragment extends Fragment {
         String email = viewModel.getEmail().getValue();
 
         if (name == null || email == null) {
-            Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -156,24 +156,24 @@ public class ProfileFragment extends Fragment {
 
         userRef.updateChildren(updates)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                    // Update ViewModel values if needed
+                    Toast.makeText(requireContext(), "Perfil actualizado exitosamente", Toast.LENGTH_SHORT).show();
                     viewModel.getName().setValue(name);
                     viewModel.getEmail().setValue(email);
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(requireContext(),
-                                "Error updating profile: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                                "Error al actualizar el perfil: " + e.getMessage(), Toast.LENGTH_LONG).show());
     }
 
     private void toggleDarkMode(boolean enableDarkMode) {
-        SharedPreferences prefs = requireActivity().getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
-        prefs.edit().putBoolean("darkMode", enableDarkMode).apply();
+        // Save dark mode preference
+        SharedPreferences prefs = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(DARK_MODE_KEY, enableDarkMode).apply();
 
+        // Apply dark mode
         AppCompatDelegate.setDefaultNightMode(
                 enableDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
         );
-        requireActivity().recreate();
     }
 
     @Override
