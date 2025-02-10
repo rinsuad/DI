@@ -1,18 +1,16 @@
 package myrecipes.app.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.content.Context;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
@@ -23,52 +21,39 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import myrecipes.app.R;
+import myrecipes.app.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
-
-    private EditText currentPasswordEditText, newPasswordEditText;
-    private SwitchMaterial darkModeSwitch;
-
-    public ProfileFragment() { }
+    private FragmentProfileBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
-        currentPasswordEditText = view.findViewById(R.id.currentPasswordEditText);
-        newPasswordEditText = view.findViewById(R.id.newPasswordEditText);
-        darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        // Estado inicial del switch (obtener de SharedPreferences)
+        // Get initial dark mode state from SharedPreferences
         SharedPreferences prefs = requireActivity().getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         boolean isDarkMode = prefs.getBoolean("darkMode", false);
-        darkModeSwitch.setChecked(isDarkMode);
+        binding.darkModeSwitch.setChecked(isDarkMode);
 
-        // Listener para botón "Cambiar contraseña"
-        Button changePasswordButton = view.findViewById(R.id.changePasswordButton);
-        changePasswordButton.setOnClickListener(v -> changePassword());
-
-        // Listener para alternar modo oscuro/claro
-        darkModeSwitch.setOnCheckedChangeListener((compoundButton, checked) -> toggleDarkMode(checked));
-
-        Button updateProfileButton = view.findViewById(R.id.updateProfileButton);
-        updateProfileButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-        });
-
-        return view;
+        // Setup click listeners
+        binding.changePasswordButton.setOnClickListener(v -> changePassword());
+        binding.darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> toggleDarkMode(isChecked));
+        binding.updateProfileButton.setOnClickListener(v -> updateProfile());
     }
 
     private void changePassword() {
-        String currentPass = currentPasswordEditText.getText().toString();
-        String newPass = newPasswordEditText.getText().toString();
+        String currentPass = binding.currentPasswordEditText.getText().toString();
+        String newPass = binding.newPasswordEditText.getText().toString();
 
-        // Primero reautenticar al usuario (opcional) o directamente update:
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null && !newPass.isEmpty()) {
-            // EJEMPLO: reautenticación con la credencial actual (si quieres ser estricto con la seguridad)
             AuthCredential credential = EmailAuthProvider
                     .getCredential(user.getEmail(), currentPass);
 
@@ -89,17 +74,22 @@ public class ProfileFragment extends Fragment {
     }
 
     private void toggleDarkMode(boolean enableDarkMode) {
-        // Guardamos la preferencia
         SharedPreferences prefs = requireActivity().getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         prefs.edit().putBoolean("darkMode", enableDarkMode).apply();
 
-        // Aplicamos el tema
-        if (enableDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-        // Recreamos la activity para que se aplique el cambio
+        AppCompatDelegate.setDefaultNightMode(
+                enableDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
         requireActivity().recreate();
+    }
+
+    private void updateProfile() {
+        // Implement profile update logic
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

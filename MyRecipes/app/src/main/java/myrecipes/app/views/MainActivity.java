@@ -1,8 +1,11 @@
 package myrecipes.app.views;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +13,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import myrecipes.app.R;
 import myrecipes.app.databinding.ActivityMainBinding;
@@ -50,16 +56,65 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navigationView, navController);
 
+        // Add destination change listener to update toolbar title
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            updateToolbarTitle(destination);
+        });
+
         // Observe loading state
         viewModel.getLoadingState().observe(this, isLoading -> {
             binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });
 
         // Handle navigation item selection
-        binding.navigationView.setNavigationItemSelectedListener(item -> {
-            binding.drawerLayout.closeDrawer(GravityCompat.START);
-            return NavigationUI.onNavDestinationSelected(item, navController);
-        });
+        binding.navigationView.setNavigationItemSelectedListener(this::handleNavigationItemSelected);
+    }
+
+    private boolean handleNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.logout) {
+            logout();
+            return true;
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START);
+        return NavigationUI.onNavDestinationSelected(item, navController);
+    }
+
+    private void logout() {
+        // Sign out from Firebase
+        FirebaseAuth.getInstance().signOut();
+
+        // Clear any relevant SharedPreferences
+        getSharedPreferences("settings", MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
+
+        // Navigate to Login Activity
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void updateToolbarTitle(NavDestination destination) {
+        String title;
+        int destId = destination.getId();
+
+        if (destId == R.id.dashboardFragment) {
+            title = "Dashboard";
+        } else if (destId == R.id.favouritesFragment) {
+            title = "Favorites";
+        } else if (destId == R.id.profileFragment) {
+            title = "Profile";
+        } else if (destId == R.id.detailFragment) {
+            title = "Recipe Details";
+        } else {
+            title = getString(R.string.app_name);
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
     }
 
     @Override

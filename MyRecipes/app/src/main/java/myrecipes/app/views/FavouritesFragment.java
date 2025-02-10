@@ -1,6 +1,5 @@
 package myrecipes.app.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import myrecipes.app.R;
 import myrecipes.app.adapters.RecipeAdapter;
 import myrecipes.app.databinding.FragmentFavouriteBinding;
 import myrecipes.app.models.Recipe;
@@ -50,21 +49,18 @@ public class FavouritesFragment extends Fragment implements RecipeAdapter.OnReci
             } else {
                 ((RecipeAdapter) binding.recyclerView.getAdapter()).updateRecipes(recipes);
             }
-        });
 
-        // Toolbar setup
-        if (getActivity() != null) {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            binding.toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
-        }
+            // Show/hide empty state
+            binding.emptyStateText.setVisibility(recipes.isEmpty() ? View.VISIBLE : View.GONE);
+        });
     }
 
     @Override
     public void onRecipeClick(Recipe recipe) {
-        FavouritesFragmentDirections.ActionFavouritesToDetail action =
-                FavouritesFragmentDirections.actionFavouritesToDetail(recipe.getId());
-        Navigation.findNavController(requireView()).navigate(action);
+        Bundle args = new Bundle();
+        args.putString("RECIPE_ID", recipe.getId());
+        Navigation.findNavController(requireView())
+                .navigate(R.id.action_favourites_to_detail, args);
     }
 
     @Override

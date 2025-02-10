@@ -6,11 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.List;
 
 import myrecipes.app.R;
@@ -41,6 +46,26 @@ public class DetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupViewModel();
         setupFavouriteFab();
+
+        // Expand the AppBarLayout when entering the fragment
+        if (requireActivity() instanceof MainActivity) {
+            MainActivity activity = (MainActivity) requireActivity();
+            AppBarLayout mainAppBar = activity.findViewById(R.id.appBarLayout);
+            if (mainAppBar != null) {
+                mainAppBar.setExpanded(true, true);
+            }
+        }
+    }
+
+    private void setupViewModel() {
+        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+
+        if (recipeId != null) {
+            viewModel.loadRecipe(recipeId);
+            viewModel.getRecipe().observe(getViewLifecycleOwner(), this::displayRecipeDetails);
+        }
     }
 
     private void setupFavouriteFab() {
@@ -58,19 +83,13 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private void setupViewModel() {
-        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-        binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(getViewLifecycleOwner());
-
-        if (recipeId != null) {
-            viewModel.loadRecipe(recipeId);
-            viewModel.getRecipe().observe(getViewLifecycleOwner(), this::displayRecipeDetails);
-        }
-    }
-
     private void displayRecipeDetails(Recipe recipe) {
         Log.d("DetailFragment", "displayRecipeDetails: " + recipe.getTitle() + recipe.getCalories());
+
+        // Set recipe image
+        Glide.with(requireContext())
+                .load(recipe.getImageUrl())
+                .into(binding.recipeImageView);
 
         binding.ingredientsContainer.removeAllViews();
         for (List<Object> ingredient : recipe.getIngredients()) {
