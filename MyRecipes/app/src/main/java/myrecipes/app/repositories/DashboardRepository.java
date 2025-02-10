@@ -55,16 +55,27 @@ public class DashboardRepository {
         recipeRef.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                // Log the raw data
+                Log.d("DashboardRepository", "Raw data: " + snapshot.getValue());
+
+                // Log specific field
+                Log.d("DashboardRepository", "Calories field: " +
+                        snapshot.child("calorias_totales").getValue());
+
                 Recipe recipe = snapshot.getValue(Recipe.class);
                 if (recipe != null) {
                     recipe.setId(snapshot.getKey());
+                    Log.d("DashboardRepository", "Parsed Recipe - Title: " + recipe.getTitle()
+                            + ", Calories: " + recipe.getCalories());
                     recipeLiveData.setValue(recipe);
+                } else {
+                    Log.e("DashboardRepository", "Failed to parse recipe");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Error handling
+                Log.e("DashboardRepository", "Error loading recipe: " + error.getMessage());
             }
         });
     }

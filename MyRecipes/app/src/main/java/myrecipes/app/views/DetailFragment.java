@@ -73,8 +73,6 @@ public class DetailFragment extends Fragment {
     }
 
     private void displayRecipeDetails(Recipe recipe) {
-        Log.d("DetailFragment", "displayRecipeDetails: " + recipe.getTitle() + recipe.getCalories());
-
         // Set recipe image
         Glide.with(requireContext())
                 .load(recipe.getImageUrl())
