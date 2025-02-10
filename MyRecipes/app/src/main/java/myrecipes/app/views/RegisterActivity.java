@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import myrecipes.app.R;
+import myrecipes.app.utils.ValidationResult;
+import myrecipes.app.utils.ValidationUtils;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -56,86 +61,99 @@ public class RegisterActivity extends AppCompatActivity {
         String phone = phoneEditText.getText().toString().trim();
         String address = addressEditText.getText().toString().trim();
 
-        // Validar campos
-        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || phone.isEmpty() || address.isEmpty()) {
-            Toast.makeText(this, "Todos los campos son obligatorios.", Toast.LENGTH_SHORT).show();
+        // Validate all fields
+        ValidationResult nameValidation = ValidationUtils.validateFullName(fullName);
+        if (!nameValidation.isValid()) {
+            fullNameEditText.setError(nameValidation.getErrorMessage());
             return;
         }
 
-        //Validar nombre
-        if (fullName.length() < 3 || !fullName.matches("[a-zA-Z ]+")) {
-            Toast.makeText(this, "El nombre debe tener al menos 3 caracteres y contener solo letras.", Toast.LENGTH_SHORT).show();
+        ValidationResult emailValidation = ValidationUtils.validateEmail(email);
+        if (!emailValidation.isValid()) {
+            emailEditText.setError(emailValidation.getErrorMessage());
             return;
         }
 
-        // Validar formato del correo electrónico
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "El correo electrónico no es válido. Debe tener un formato a@a.com", Toast.LENGTH_SHORT).show();
+        ValidationResult passwordValidation = ValidationUtils.validatePassword(password);
+        if (!passwordValidation.isValid()) {
+            passwordEditText.setError(passwordValidation.getErrorMessage());
             return;
         }
 
-        // Validar longitud de la contraseña
-        if (password.length() < 6) {
-            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres.", Toast.LENGTH_SHORT).show();
+        ValidationResult passwordMatchValidation = ValidationUtils.validatePasswordMatch(password, confirmPassword);
+        if (!passwordMatchValidation.isValid()) {
+            confirmPasswordEditText.setError(passwordMatchValidation.getErrorMessage());
             return;
         }
 
-        // Validar coincidencia de contraseñas
-        if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+        ValidationResult phoneValidation = ValidationUtils.validatePhone(phone);
+        if (!phoneValidation.isValid()) {
+            phoneEditText.setError(phoneValidation.getErrorMessage());
             return;
         }
 
-        // Validar número de teléfono (ejemplo: al menos 10 dígitos)
-        if (phone.length() < 10 || !phone.matches("\\d+")) {
-            Toast.makeText(this, "El número de teléfono debe tener al menos 10 dígitos y contener solo números.", Toast.LENGTH_SHORT).show();
+        ValidationResult addressValidation = ValidationUtils.validateAddress(address);
+        if (!addressValidation.isValid()) {
+            addressEditText.setError(addressValidation.getErrorMessage());
             return;
         }
 
-        // Validar longitud mínima de la dirección
-        if (address.length() < 10) {
-            Toast.makeText(this, "La dirección debe tener al menos 10 caracteres.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // If all validations pass, proceed with registration
+        registerUserInFirebase(fullName, email, password, phone, address);
+    }
 
-        // Si todas las validaciones pasan
-        Toast.makeText(this, "Validaciones completadas exitosamente. Registrando usuario.", Toast.LENGTH_SHORT).show();
-
-
-        if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Registrar en Firebase Authentication
+    private void registerUserInFirebase(String fullName, String email, String password,
+                                        String phone, String address) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         if (firebaseUser != null) {
-                            String userId = firebaseUser.getUid();
-
-                            // Guardar datos adicionales en Realtime Database
-                            Map<String, Object> userMap = new HashMap<>();
-                            userMap.put("fullName", fullName);
-                            userMap.put("email", email);
-                            userMap.put("phone", phone);
-                            userMap.put("address", address);
-
-                            mDatabase.child("users").child(userId).setValue(userMap)
-                                    .addOnCompleteListener(dbTask -> {
-                                        if (dbTask.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this, "Registro exitoso.", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                            finish();
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "Error al guardar datos.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            saveUserData(firebaseUser.getUid(), fullName, email, phone, address);
                         }
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Error en el registro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        handleRegistrationError(task.getException());
                     }
                 });
+    }
+
+    private void saveUserData(String userId, String fullName, String email,
+                              String phone, String address) {
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("fullName", fullName);
+        userMap.put("email", email);
+        userMap.put("phone", phone);
+        userMap.put("address", address);
+
+        mDatabase.child("users").child(userId).setValue(userMap)
+                .addOnCompleteListener(dbTask -> {
+                    if (dbTask.isSuccessful()) {
+                        Toast.makeText(RegisterActivity.this,
+                                "Registration successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        finish();
+                    } else {
+                        handleDatabaseError(dbTask.getException());
+                    }
+                });
+    }
+
+    private void handleRegistrationError(Exception exception) {
+        String errorMessage = "Registration failed: ";
+        if (exception instanceof FirebaseAuthWeakPasswordException) {
+            errorMessage += "Password is too weak";
+        } else if (exception instanceof FirebaseAuthInvalidCredentialsException) {
+            errorMessage += "Invalid email format";
+        } else if (exception instanceof FirebaseAuthUserCollisionException) {
+            errorMessage += "Email already in use";
+        } else {
+            errorMessage += exception.getMessage();
+        }
+        Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleDatabaseError(Exception exception) {
+        Toast.makeText(RegisterActivity.this,
+                "Error saving user data: " + exception.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
