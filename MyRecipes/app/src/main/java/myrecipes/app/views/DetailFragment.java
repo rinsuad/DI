@@ -9,12 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.List;
 
@@ -46,15 +44,6 @@ public class DetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupViewModel();
         setupFavouriteFab();
-
-        // Expand the AppBarLayout when entering the fragment
-        if (requireActivity() instanceof MainActivity) {
-            MainActivity activity = (MainActivity) requireActivity();
-            AppBarLayout mainAppBar = activity.findViewById(R.id.appBarLayout);
-            if (mainAppBar != null) {
-                mainAppBar.setExpanded(true, true);
-            }
-        }
     }
 
     private void setupViewModel() {

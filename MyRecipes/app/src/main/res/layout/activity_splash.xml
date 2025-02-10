@@ -5,16 +5,16 @@
     android:background="@color/md_theme_surface">
 
     <ImageView
-        android:id="@+id/splash_logo"
+        android:id="@+id/splash_gif"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/app_logo" />
+        android:contentDescription="Splash animation" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splash_logo"
+        android:layout_below="@id/splash_gif"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/app_name"

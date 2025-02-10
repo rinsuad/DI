@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -58,16 +57,31 @@ public class MainActivity extends AppCompatActivity {
 
         // Add destination change listener to update toolbar title
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            updateToolbarTitle(destination);
+            String title = "";
+            int id = destination.getId();
+
+            if (id == R.id.dashboardFragment) {
+                title = "Mis Recetas";
+            } else if (id == R.id.favouritesFragment) {
+                title = "Favoritos";
+            } else if (id == R.id.profileFragment) {
+                title = "Perfil";
+            } else if (id == R.id.detailFragment) {
+                title = "Detalles de Receta";
+            }
+
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+            }
         });
+
+        // Handle navigation item selection
+        binding.navigationView.setNavigationItemSelectedListener(this::handleNavigationItemSelected);
 
         // Observe loading state
         viewModel.getLoadingState().observe(this, isLoading -> {
             binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });
-
-        // Handle navigation item selection
-        binding.navigationView.setNavigationItemSelectedListener(this::handleNavigationItemSelected);
     }
 
     private boolean handleNavigationItemSelected(@NonNull MenuItem item) {
@@ -80,41 +94,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        // Sign out from Firebase
         FirebaseAuth.getInstance().signOut();
-
-        // Clear any relevant SharedPreferences
         getSharedPreferences("settings", MODE_PRIVATE)
                 .edit()
                 .clear()
                 .apply();
-
-        // Navigate to Login Activity
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-    }
-
-    private void updateToolbarTitle(NavDestination destination) {
-        String title;
-        int destId = destination.getId();
-
-        if (destId == R.id.dashboardFragment) {
-            title = "Dashboard";
-        } else if (destId == R.id.favouritesFragment) {
-            title = "Favorites";
-        } else if (destId == R.id.profileFragment) {
-            title = "Profile";
-        } else if (destId == R.id.detailFragment) {
-            title = "Recipe Details";
-        } else {
-            title = getString(R.string.app_name);
-        }
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(title);
-        }
     }
 
     @Override
