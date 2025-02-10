@@ -1,21 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_dashboard"
-        android:title="Dashboard"
-        android:icon="@drawable/ic_dashboard" />
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Dashboard" />
 
     <item
-        android:id="@+id/nav_favourites"
-        android:title="Favoritos"
-        android:icon="@drawable/ic_favourite" />
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/ic_favourite"
+        android:title="Favourites" />
 
     <item
-        android:id="@+id/nav_profile"
-        android:title="Perfil"
-        android:icon="@drawable/ic_person" />
-
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Cerrar Sesión"
-        android:icon="@drawable/ic_logout" />
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_person"
+        android:title="Profile" />
 </menu>

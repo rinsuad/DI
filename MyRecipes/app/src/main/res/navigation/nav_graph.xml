@@ -1,0 +1,38 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="myrecipes.app.views.DashboardFragment"
+        android:label="Dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_detail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="myrecipes.app.views.DetailFragment"
+        android:label="Recipe Details">
+        <argument
+            android:name="RECIPE_ID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="myrecipes.app.views.FavouritesFragment"
+        android:label="Favourites">
+        <action
+            android:id="@+id/action_favourites_to_detail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="myrecipes.app.views.ProfileFragment"
+        android:label="Profile" />
+
+</navigation>

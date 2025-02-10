@@ -39,17 +39,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupToolbar();
         setupViewModel();
         setupFavouriteFab();
-    }
-
-    private void setupToolbar() {
-        if (getActivity() != null) {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            binding.toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
-        }
     }
 
     private void setupFavouriteFab() {

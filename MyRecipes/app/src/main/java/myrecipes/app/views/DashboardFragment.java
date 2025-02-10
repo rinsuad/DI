@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import myrecipes.app.R;
@@ -78,9 +79,10 @@ public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecip
 
     @Override
     public void onRecipeClick(Recipe recipe) {
-        Intent intent = new Intent(requireContext(), DetailFragment.class);
-        intent.putExtra("RECIPE_ID", recipe.getId());
-        startActivity(intent);
+        Bundle args = new Bundle();
+        args.putString("RECIPE_ID", recipe.getId());
+        Navigation.findNavController(requireView())
+                .navigate(R.id.action_dashboard_to_detail, args);
     }
 
     @Override

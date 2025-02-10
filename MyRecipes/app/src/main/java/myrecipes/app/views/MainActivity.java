@@ -1,14 +1,16 @@
 package myrecipes.app.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
+import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.navigation.NavController;
+
 import myrecipes.app.R;
 import myrecipes.app.databinding.ActivityMainBinding;
 import myrecipes.app.viewmodels.MainViewModel;
@@ -16,68 +18,53 @@ import myrecipes.app.viewmodels.MainViewModel;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Setup Toolbar
+        setSupportActionBar(binding.toolbar);
+
+        // Setup ViewModel
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
-        setupNavigationView();
-        setupObservers();
+        // Setup Navigation
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
 
-        if (savedInstanceState == null) {
-            openFragment(new DashboardFragment());
-        }
-    }
+        // Setup DrawerLayout with Navigation
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.dashboardFragment,
+                R.id.favouritesFragment,
+                R.id.profileFragment
+        ).setOpenableLayout(binding.drawerLayout).build();
 
-    private void setupNavigationView() {
-        binding.navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_dashboard) {
-                openFragment(new DashboardFragment());
-            } else if (id == R.id.nav_favourites) {
-                openFragment(new FavouritesFragment());
-            } else if (id == R.id.nav_profile) {
-                openFragment(new ProfileFragment());
-            } else if (id == R.id.nav_logout) {
-                logoutUser();
-            }
-            binding.drawerLayout.closeDrawers();
-            return true;
-        });
-    }
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navigationView, navController);
 
-    private void openFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
-    }
-
-    private void setupObservers() {
+        // Observe loading state
         viewModel.getLoadingState().observe(this, isLoading -> {
             binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });
 
-        viewModel.getError().observe(this, error -> {
-            if (error != null) {
-                showError(error);
-                viewModel.clearError();
-            }
+        // Handle navigation item selection
+        binding.navigationView.setNavigationItemSelectedListener(item -> {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            return NavigationUI.onNavDestinationSelected(item, navController);
         });
     }
 
-    private void logoutUser() {
-        viewModel.setLoading(true);
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    private void showError(String error) {
-        Snackbar.make(binding.fragmentContainer, error, Snackbar.LENGTH_LONG).show();
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }

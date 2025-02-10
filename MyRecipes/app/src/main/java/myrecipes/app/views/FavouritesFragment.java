@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import myrecipes.app.adapters.RecipeAdapter;
@@ -61,10 +62,9 @@ public class FavouritesFragment extends Fragment implements RecipeAdapter.OnReci
 
     @Override
     public void onRecipeClick(Recipe recipe) {
-        // Navigate using your navigation component or start activity
-        Intent intent = new Intent(requireContext(), DetailFragment.class);
-        intent.putExtra("RECIPE_ID", recipe.getId());
-        startActivity(intent);
+        FavouritesFragmentDirections.ActionFavouritesToDetail action =
+                FavouritesFragmentDirections.actionFavouritesToDetail(recipe.getId());
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override
