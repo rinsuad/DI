@@ -166,14 +166,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void toggleDarkMode(boolean enableDarkMode) {
-        // Save dark mode preference
-        SharedPreferences prefs = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        prefs.edit().putBoolean(DARK_MODE_KEY, enableDarkMode).apply();
-
-        // Apply dark mode
-        AppCompatDelegate.setDefaultNightMode(
-                enableDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-        );
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).toggleDarkMode(enableDarkMode);
+        }
     }
 
     @Override

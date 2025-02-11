@@ -28,9 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
+    private static final String PREFS_NAME = "AppSettings";
+    private static final String DARK_MODE_KEY = "dark_mode_enabled";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        applyDarkMode();
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -113,5 +116,23 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void applyDarkMode() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        boolean isDarkMode = prefs.getBoolean(DARK_MODE_KEY, false);
+        AppCompatDelegate.setDefaultNightMode(
+                isDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
+    }
+
+    // Create a public method to toggle dark mode that can be called from fragments
+    public void toggleDarkMode(boolean enableDarkMode) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(DARK_MODE_KEY, enableDarkMode).apply();
+
+        AppCompatDelegate.setDefaultNightMode(
+                enableDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
     }
 }

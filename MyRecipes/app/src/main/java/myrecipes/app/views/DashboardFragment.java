@@ -62,12 +62,6 @@ public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecip
                 ((RecipeAdapter) binding.recyclerView.getAdapter()).updateRecipes(recipes);
             }
         });
-
-        // Load saved night mode preference
-        SharedPreferences prefs = requireContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        isNightMode = prefs.getBoolean(NIGHT_MODE_KEY, false);
-        AppCompatDelegate.setDefaultNightMode(isNightMode ?
-                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     @Override
