@@ -1,6 +1,5 @@
 package myrecipes.app.views;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -20,14 +18,10 @@ import myrecipes.app.databinding.FragmentDashboardBinding;
 import myrecipes.app.models.Recipe;
 import myrecipes.app.viewmodels.DashboardViewModel;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class DashboardFragment extends Fragment implements RecipeAdapter.OnRecipeClickListener {
     private DashboardViewModel viewModel;
     private FragmentDashboardBinding binding;
-    private static final String PREFS_NAME = "settings";
-    private static final String NIGHT_MODE_KEY = "night_mode";
-    private boolean isNightMode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

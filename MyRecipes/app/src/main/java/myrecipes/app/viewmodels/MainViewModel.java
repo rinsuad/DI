@@ -11,20 +11,4 @@ public class MainViewModel extends ViewModel {
     public LiveData<Boolean> getLoadingState() {
         return isLoading;
     }
-
-    public LiveData<String> getError() {
-        return error;
-    }
-
-    public void setLoading(boolean loading) {
-        isLoading.setValue(loading);
-    }
-
-    public void setError(String errorMessage) {
-        error.setValue(errorMessage);
-    }
-
-    public void clearError() {
-        error.setValue(null);
-    }
 }
