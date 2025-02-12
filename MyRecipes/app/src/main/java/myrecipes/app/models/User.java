@@ -1,6 +1,5 @@
 package myrecipes.app.models;
 
-// Clase User para representar los datos de usuario
 public class User {
     private String uid;
     private String email;

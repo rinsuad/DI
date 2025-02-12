@@ -16,10 +16,6 @@ public class ProfileViewModel extends ViewModel {
 
     public MutableLiveData<String> getName() { return name; }
     public MutableLiveData<String> getEmail() { return email; }
-    public MutableLiveData<String> getCurrentPassword() { return currentPassword; }
-    public MutableLiveData<String> getNewPassword() { return newPassword; }
-    public MutableLiveData<String> getError() { return error; }
-    public MutableLiveData<Boolean> getIsLoading() { return isLoading; }
 
     public void setError(String errorMessage) {
         error.setValue(errorMessage);
@@ -36,11 +32,6 @@ public class ProfileViewModel extends ViewModel {
     public boolean validateInputs() {
         String nameValue = name.getValue();
         String emailValue = email.getValue();
-
-        if (nameValue == null || emailValue == null) {
-            error.setValue("Please fill in all fields");
-            return false;
-        }
 
         ValidationResult nameValidation = ValidationUtils.validateFullName(nameValue);
         if (!nameValidation.isValid()) {

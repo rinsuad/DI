@@ -1,12 +1,8 @@
 package myrecipes.app.models;
 
-import android.util.Log;
-
 import com.google.firebase.database.PropertyName;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Recipe {
