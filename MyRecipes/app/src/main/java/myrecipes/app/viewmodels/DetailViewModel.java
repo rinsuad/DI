@@ -21,8 +21,6 @@ public class DetailViewModel extends ViewModel {
     }
 
     public LiveData<Recipe> getRecipe() { return recipe; }
-    public LiveData<String> getError() { return error; }
-    public LiveData<Boolean> getLoading() { return loading; }
     public LiveData<Boolean> isFavourite() { return isFavourite; }
 
     public void loadRecipe(String recipeId) {

@@ -2,70 +2,81 @@ package myrecipes.app.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import myrecipes.app.R;
+import myrecipes.app.databinding.ActivityLoginBinding;
+import myrecipes.app.utils.ValidationResult;
+import myrecipes.app.utils.ValidationUtils;
+import myrecipes.app.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailEditText, passwordEditText;
-    private Button loginButton, registerButton;
-    private FirebaseAuth mAuth;
+    private LoginViewModel viewModel;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        emailEditText = findViewById(R.id.emailEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        setupClickListeners();
+        observeViewModel();
+    }
 
-        mAuth = FirebaseAuth.getInstance();
-
-        loginButton.setOnClickListener(v -> loginUser());
-        registerButton.setOnClickListener(v -> {
+    private void setupClickListeners() {
+        binding.loginButton.setOnClickListener(v -> validateAndLogin());
+        binding.registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
     }
 
-    private void loginUser() {
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email)) {
-            emailEditText.setError("Email requerido");
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Contraseña requerida");
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user != null) {
-                    Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            } else {
-                Toast.makeText(LoginActivity.this, "Error al iniciar sesión: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+    private void observeViewModel() {
+        viewModel.getUserLiveData().observe(this, user -> {
+            if (user != null) {
+                Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
         });
+
+        viewModel.getErrorLiveData().observe(this, error ->
+                Toast.makeText(LoginActivity.this, "Error: " + error, Toast.LENGTH_LONG).show());
+
+        viewModel.getIsLoadingLiveData().observe(this, isLoading -> {
+            binding.loginButton.setEnabled(!isLoading);
+            binding.registerButton.setEnabled(!isLoading);
+        });
+    }
+
+    private void validateAndLogin() {
+        String email = binding.emailEditText.getText().toString().trim();
+        String password = binding.passwordEditText.getText().toString().trim();
+
+        // Validate email
+        ValidationResult emailValidation = ValidationUtils.validateEmail(email);
+        if (!emailValidation.isValid()) {
+            binding.emailEditText.setError(emailValidation.getErrorMessage());
+            return;
+        }
+
+        // Validate password is not empty
+        if (password.isEmpty()) {
+            binding.passwordEditText.setError("Contraseña requerida");
+            return;
+        }
+
+        viewModel.login(email, password);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

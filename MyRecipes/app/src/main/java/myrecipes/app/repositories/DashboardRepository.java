@@ -55,41 +55,28 @@ public class DashboardRepository {
         recipeRef.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                // Log the raw data
+                Log.d("DashboardRepository", "Raw data: " + snapshot.getValue());
+
+                // Log specific field
+                Log.d("DashboardRepository", "Calories field: " +
+                        snapshot.child("calorias_totales").getValue());
+
                 Recipe recipe = snapshot.getValue(Recipe.class);
                 if (recipe != null) {
                     recipe.setId(snapshot.getKey());
+                    Log.d("DashboardRepository", "Parsed Recipe - Title: " + recipe.getTitle()
+                            + ", Calories: " + recipe.getCalories());
                     recipeLiveData.setValue(recipe);
+                } else {
+                    Log.e("DashboardRepository", "Failed to parse recipe");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Error handling
+                Log.e("DashboardRepository", "Error loading recipe: " + error.getMessage());
             }
         });
-    }
-
-    public void toggleFavourite(String recipeId, boolean isFavourite) {
-        if (isFavourite) {
-            // Get the recipe and add to favourites
-            recipeRef.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Recipe recipe = snapshot.getValue(Recipe.class);
-                    if (recipe != null) {
-                        recipe.setId(snapshot.getKey());
-                        favouriteRef.child(recipeId).setValue(recipe);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle error
-                }
-            });
-        } else {
-            // Remove from favourites
-            favouriteRef.child(recipeId).removeValue();
-        }
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="myrecipes.app.views.DashboardFragment"
+        android:label="Mis Recetas">
+        <action
+            android:id="@+id/action_dashboard_to_detail"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="myrecipes.app.views.DetailFragment"
+        android:label="Detalles de Receta">
+        <argument
+            android:name="RECIPE_ID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="myrecipes.app.views.FavouritesFragment"
+        android:label="Favoritos">
+        <action
+            android:id="@+id/action_favourites_to_detail"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="myrecipes.app.views.ProfileFragment"
+        android:label="Perfil" />
+
+    <!-- Global actions for drawer navigation -->
+    <action
+        android:id="@+id/action_global_dashboard"
+        app:destination="@id/dashboardFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_favourites"
+        app:destination="@id/favouritesFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_profile"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+</navigation>

@@ -3,24 +3,33 @@ package myrecipes.app.viewmodels;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.auth.FirebaseUser;
 
+import myrecipes.app.repositories.UserRepository;
+
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<FirebaseUser> userLiveData;
-    private MutableLiveData<String> errorLiveData;
-    private FirebaseAuth auth;
+    private final UserRepository userRepository;
+    private final MutableLiveData<FirebaseUser> userLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
 
     public LoginViewModel() {
-        auth = FirebaseAuth.getInstance();
-        userLiveData = new MutableLiveData<>();
-        errorLiveData = new MutableLiveData<>();
+        userRepository = new UserRepository();
     }
 
     public void login(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> userLiveData.setValue(authResult.getUser()))
-                .addOnFailureListener(e -> errorLiveData.setValue(e.getMessage()));
+        isLoadingLiveData.setValue(true);
+
+        userRepository.loginUser(email, password)
+                .addOnSuccessListener(authResult -> {
+                    isLoadingLiveData.setValue(false);
+                    userLiveData.setValue(authResult.getUser());
+                })
+                .addOnFailureListener(e -> {
+                    isLoadingLiveData.setValue(false);
+                    errorLiveData.setValue(e.getMessage());
+                });
     }
 
     public LiveData<FirebaseUser> getUserLiveData() {
@@ -29,5 +38,9 @@ public class LoginViewModel extends ViewModel {
 
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
+    }
+
+    public LiveData<Boolean> getIsLoadingLiveData() {
+        return isLoadingLiveData;
     }
 }

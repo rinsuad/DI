@@ -12,20 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-        <activity android:name=".views.LoginActivity"
-            android:exported="true"
-            android:label="Login"
-            android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".views.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".views.RegisterActivity" android:theme="@style/AppTheme" android:exported="true"/>
-        <activity android:name=".views.DashboardActivity" android:theme="@style/AppTheme" android:exported="true"/>
-        <activity android:name=".views.DetailActivity" android:theme="@style/AppTheme" android:exported="true"/>
-        <activity android:name=".views.FavouriteActivity" android:theme="@style/AppTheme" android:exported="true"/>
+        <activity android:name=".views.MainActivity"
+            android:theme="@style/AppTheme"
+            android:exported="true"/>
+        <activity android:name=".views.LoginActivity"
+            android:theme="@style/AppTheme"
+            android:exported="true"/>
+        <activity android:name=".views.RegisterActivity"
+            android:theme="@style/AppTheme"
+            android:exported="true"/>
     </application>
 
 </manifest>

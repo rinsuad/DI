@@ -1,42 +1,58 @@
 package myrecipes.app.views;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import myrecipes.app.R;
-import myrecipes.app.databinding.ActivityDetailBinding;
+import myrecipes.app.databinding.FragmentDetailBinding;
 import myrecipes.app.models.Recipe;
 import myrecipes.app.viewmodels.DetailViewModel;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailFragment extends Fragment {
     private DetailViewModel viewModel;
-    private ActivityDetailBinding binding;
+    private FragmentDetailBinding binding;
+    private String recipeId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-
-        setupToolbar();
-        setupViewModel();
-        setupFavouriteFab();
-
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
+        recipeId = getArguments() != null ? getArguments().getString("RECIPE_ID") : null;
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentDetailBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupViewModel();
+        setupFavouriteFab();
+    }
+
+    private void setupViewModel() {
+        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+
+        if (recipeId != null) {
+            viewModel.loadRecipe(recipeId);
+            viewModel.getRecipe().observe(getViewLifecycleOwner(), this::displayRecipeDetails);
         }
     }
 
@@ -48,33 +64,22 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        // Observe favourite status and update FAB icon
-        viewModel.isFavourite().observe(this, isFavourite -> {
+        viewModel.isFavourite().observe(getViewLifecycleOwner(), isFavourite -> {
             binding.fabFavourite.setImageResource(
                     isFavourite ? R.drawable.ic_favourite : R.drawable.ic_favourite_border
             );
         });
     }
 
-    private void setupViewModel() {
-        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-        binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
-
-        String recipeId = getIntent().getStringExtra("RECIPE_ID");
-        if (recipeId != null) {
-            viewModel.loadRecipe(recipeId);
-            viewModel.getRecipe().observe(this, this::displayRecipeDetails);
-        }
-    }
-
     private void displayRecipeDetails(Recipe recipe) {
-        Log.d("DetailActivity", "displayRecipeDetails: " + recipe.getTitle() + recipe.getCalories());
+        // Set recipe image
+        Glide.with(requireContext())
+                .load(recipe.getImageUrl())
+                .into(binding.recipeImageView);
 
-        // Update dynamic containers that can't be directly bound
         binding.ingredientsContainer.removeAllViews();
         for (List<Object> ingredient : recipe.getIngredients()) {
-            TextView ingredientTextView = new TextView(this);
+            TextView ingredientTextView = new TextView(requireContext());
             String ingredientText = "• " + ingredient.get(0) + " (" + ingredient.get(2) + ")";
             ingredientTextView.setText(ingredientText);
             ingredientTextView.setTextSize(18);
@@ -84,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
 
         binding.stepsContainer.removeAllViews();
         for (int i = 0; i < recipe.getSteps().size(); i++) {
-            TextView stepTextView = new TextView(this);
+            TextView stepTextView = new TextView(requireContext());
             stepTextView.setText((i + 1) + ". " + recipe.getSteps().get(i));
             stepTextView.setTextSize(18);
             stepTextView.setTextAppearance(R.style.CustomEditText);
@@ -92,11 +97,17 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         binding.caloriesContainer.removeAllViews();
-        TextView caloriesTextView = new TextView(this);
+        TextView caloriesTextView = new TextView(requireContext());
         int calories = recipe.getCalories();
-        caloriesTextView.setText(calories + " Calories");
+        caloriesTextView.setText(calories + " Calorias totales");
         caloriesTextView.setTextSize(18);
         caloriesTextView.setTextAppearance(R.style.CustomEditText);
         binding.caloriesContainer.addView(caloriesTextView);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
