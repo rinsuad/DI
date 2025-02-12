@@ -79,28 +79,4 @@ public class DashboardRepository {
             }
         });
     }
-
-    public void toggleFavourite(String recipeId, boolean isFavourite) {
-        if (isFavourite) {
-            // Get the recipe and add to favourites
-            recipeRef.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Recipe recipe = snapshot.getValue(Recipe.class);
-                    if (recipe != null) {
-                        recipe.setId(snapshot.getKey());
-                        favouriteRef.child(recipeId).setValue(recipe);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle error
-                }
-            });
-        } else {
-            // Remove from favourites
-            favouriteRef.child(recipeId).removeValue();
-        }
-    }
 }

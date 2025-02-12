@@ -58,16 +58,6 @@ public class Recipe {
         this.calories = calories;
     }
 
-    public List<String> getIngredientsList() {
-        List<String> ingredientStrings = new ArrayList<>();
-        if (ingredients != null) {
-            for (List<Object> ingredient : ingredients) {
-                ingredientStrings.add(ingredient.get(0).toString());
-            }
-        }
-        return ingredientStrings;
-    }
-
     public List<List<Object>> getIngredients() {
         return ingredients;
     }
