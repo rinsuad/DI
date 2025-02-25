@@ -1,12 +1,14 @@
+/**
+ * Handles new user registration process.
+ * Demonstrates form validation, Firebase Authentication, and user data storage.
+ */
 package myrecipes.app.views;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import myrecipes.app.databinding.ActivityRegisterBinding;
 import myrecipes.app.utils.ValidationResult;
 import myrecipes.app.utils.ValidationUtils;
@@ -16,22 +18,34 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterViewModel viewModel;
     private ActivityRegisterBinding binding;
 
+    /**
+     * Initializes the activity, sets up data binding and ViewModel.
+     * Shows proper activity setup with MVVM pattern.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Initialize ViewModel
         viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        observeViewModel();
 
+        // Setup observers and click listeners
+        observeViewModel();
         binding.registerButton.setOnClickListener(v -> validateAndRegister());
     }
 
+    /**
+     * Sets up observers for ViewModel's LiveData objects.
+     * Demonstrates proper handling of registration state changes.
+     */
     private void observeViewModel() {
+        // Observe error states
         viewModel.getErrorLiveData().observe(this, error ->
                 Toast.makeText(this, error, Toast.LENGTH_LONG).show());
 
+        // Observe registration success
         viewModel.getRegistrationSuccessLiveData().observe(this, success -> {
             if (success) {
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
@@ -40,11 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // Observe loading state
         viewModel.getIsLoadingLiveData().observe(this, isLoading -> {
             binding.registerButton.setEnabled(!isLoading);
         });
     }
 
+    /**
+     * Validates user input before attempting registration.
+     * Shows comprehensive form validation implementation.
+     */
     private void validateAndRegister() {
         String fullName = binding.fullNameEditText.getText().toString().trim();
         String email = binding.emailEditText.getText().toString().trim();
@@ -58,6 +77,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Validates all registration form inputs.
+     * Shows proper input validation with specific error messages.
+     *
+     * @return true if all inputs are valid, false otherwise
+     */
     private boolean validateInputs(String fullName, String email, String password,
                                    String confirmPassword, String phone, String address) {
         // Validate full name
@@ -67,28 +92,28 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
 
-        // Validate email
+        // Validate email format
         ValidationResult emailValidation = ValidationUtils.validateEmail(email);
         if (!emailValidation.isValid()) {
             binding.emailEditText.setError(emailValidation.getErrorMessage());
             return false;
         }
 
-        // Validate password
+        // Validate password strength
         ValidationResult passwordValidation = ValidationUtils.validatePassword(password);
         if (!passwordValidation.isValid()) {
             binding.passwordEditText.setError(passwordValidation.getErrorMessage());
             return false;
         }
 
-        // Validate password match
+        // Validate password confirmation
         ValidationResult passwordMatchValidation = ValidationUtils.validatePasswordMatch(password, confirmPassword);
         if (!passwordMatchValidation.isValid()) {
             binding.confirmPasswordEditText.setError(passwordMatchValidation.getErrorMessage());
             return false;
         }
 
-        // Validate phone
+        // Validate phone number
         ValidationResult phoneValidation = ValidationUtils.validatePhone(phone);
         if (!phoneValidation.isValid()) {
             binding.phoneEditText.setError(phoneValidation.getErrorMessage());
@@ -105,6 +130,10 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Cleanup to prevent memory leaks.
+     * Shows proper handling of view binding cleanup.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

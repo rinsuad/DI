@@ -14,17 +14,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 import myrecipes.app.repositories.UserRepository;
-
+/**
+ * Manages user registration process and related UI state.
+ * Handles both user authentication and profile data creation.
+ */
 public class RegisterViewModel extends ViewModel {
     private final UserRepository userRepository;
+    // Error messages for registration process
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
+    // Indicates successful registration
     private final MutableLiveData<Boolean> registrationSuccessLiveData = new MutableLiveData<>();
+    // Loading state for UI feedback
     private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
 
     public RegisterViewModel() {
         userRepository = new UserRepository();
     }
 
+    /**
+     * Initiates user registration process.
+     * Handles both authentication and user profile creation.
+     *
+     * @param fullName User's full name
+     * @param email User's email address
+     * @param password User's chosen password
+     * @param phone User's phone number
+     * @param address User's address
+     */
     public void registerUser(String fullName, String email, String password,
                              String phone, String address) {
         isLoadingLiveData.setValue(true);
@@ -42,6 +58,10 @@ public class RegisterViewModel extends ViewModel {
                 });
     }
 
+    /**
+     * Saves additional user profile data after successful authentication.
+     * Creates user document in Firestore.
+     */
     private void saveUserData(String userId, String fullName, String email,
                               String phone, String address) {
         Map<String, Object> userData = new HashMap<>();
@@ -61,6 +81,10 @@ public class RegisterViewModel extends ViewModel {
                 });
     }
 
+    /**
+     * Handles different types of registration errors.
+     * Provides specific error messages based on the exception type.
+     */
     private void handleRegistrationError(Exception exception) {
         String errorMessage = "Registration failed: ";
         if (exception instanceof FirebaseAuthWeakPasswordException) {

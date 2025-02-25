@@ -1,29 +1,38 @@
+/**
+ * Manages user favorites functionality, including adding/removing favorites
+ * and retrieving a user's favorite recipes.
+ */
 package myrecipes.app.repositories;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.database.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import myrecipes.app.models.Recipe;
 
 public class FavouriteRepository {
     private final DatabaseReference favouriteRef;
     private final FirebaseAuth auth;
 
+    /**
+     * Constructor initializes Firebase Authentication and Database references.
+     * The userFavorites node stores the favorite status for each user-recipe combination.
+     */
     public FavouriteRepository() {
         auth = FirebaseAuth.getInstance();
         favouriteRef = FirebaseDatabase.getInstance().getReference("userFavorites");
     }
 
+    /**
+     * Retrieves all favorite recipes for the current user.
+     * This is a two-step process:
+     * 1. Get all favorite recipe IDs for the user
+     * 2. Fetch the actual recipe data for each ID
+     *
+     * @param recipeLiveData LiveData object to be updated with the list of favorite recipes
+     */
     public void getFavourites(MutableLiveData<List<Recipe>> recipeLiveData) {
         String userId = auth.getCurrentUser().getUid();
         DatabaseReference userFavoritesRef = favouriteRef.child(userId);
@@ -32,6 +41,7 @@ public class FavouriteRepository {
         userFavoritesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Step 1: Collect all favorite recipe IDs
                 List<String> favoriteIds = new ArrayList<>();
                 for (DataSnapshot favoriteSnapshot : snapshot.getChildren()) {
                     if (Boolean.TRUE.equals(favoriteSnapshot.getValue(Boolean.class))) {
@@ -39,7 +49,7 @@ public class FavouriteRepository {
                     }
                 }
 
-                // Get the actual recipes
+                // Step 2: Fetch recipe data for each favorite ID
                 recipesRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot recipesSnapshot) {
@@ -69,24 +79,37 @@ public class FavouriteRepository {
         });
     }
 
+    /**
+     * Toggles the favorite status of a recipe for the current user.
+     *
+     * @param recipeId ID of the recipe to toggle
+     * @param isFavorite true to add to favorites, false to remove
+     */
     public void toggleFavorite(String recipeId, boolean isFavorite) {
         String userId = auth.getCurrentUser().getUid();
         if (isFavorite) {
-            // Add to favorites
+            // Add to favorites by setting value to true
             favouriteRef.child(userId).child(recipeId).setValue(true);
         } else {
-            // Remove from favorites
+            // Remove from favorites by removing the node
             favouriteRef.child(userId).child(recipeId).removeValue();
         }
     }
 
+    /**
+     * Checks if a recipe is in the user's favorites.
+     * Uses a ValueEventListener to stay updated with changes.
+     *
+     * @param recipeId ID of the recipe to check
+     * @param isFavoriteLiveData LiveData object to be updated with the favorite status
+     */
     public void checkIsFavorite(String recipeId, MutableLiveData<Boolean> isFavoriteLiveData) {
         String userId = auth.getCurrentUser().getUid();
         favouriteRef.child(userId).child(recipeId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // Will be null if the recipe is not in favorites
+                        // snapshot.exists() returns true if the recipe is in favorites
                         isFavoriteLiveData.setValue(snapshot.exists());
                     }
 
